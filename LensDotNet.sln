@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1704.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensDotNet", "LensDotNet\LensDotNet.csproj", "{8EBD0BB8-523B-4D93-897C-C8B2E3DCAC6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensDotNet.Tests", "LensDotNet.Tests\LensDotNet.Tests.csproj", "{CECC4F80-D4FE-4E2C-A40D-1759ABD76DE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Query.Builder", "..\graphql-query-builder-dotnet\src\GraphQL.Query.Builder\GraphQL.Query.Builder.csproj", "{13D15598-039C-4A22-927D-854C2A5496AC}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "GraphQLinq.Client", "..\GraphQLinq\src\GraphQLinq.Client\GraphQLinq.Client.csproj", "{B3F56E55-458D-44AD-B9FF-B6DC660EA1C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EBD0BB8-523B-4D93-897C-C8B2E3DCAC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EBD0BB8-523B-4D93-897C-C8B2E3DCAC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EBD0BB8-523B-4D93-897C-C8B2E3DCAC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EBD0BB8-523B-4D93-897C-C8B2E3DCAC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CECC4F80-D4FE-4E2C-A40D-1759ABD76DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECC4F80-D4FE-4E2C-A40D-1759ABD76DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECC4F80-D4FE-4E2C-A40D-1759ABD76DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECC4F80-D4FE-4E2C-A40D-1759ABD76DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13D15598-039C-4A22-927D-854C2A5496AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13D15598-039C-4A22-927D-854C2A5496AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13D15598-039C-4A22-927D-854C2A5496AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13D15598-039C-4A22-927D-854C2A5496AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3F56E55-458D-44AD-B9FF-B6DC660EA1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3F56E55-458D-44AD-B9FF-B6DC660EA1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F56E55-458D-44AD-B9FF-B6DC660EA1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F56E55-458D-44AD-B9FF-B6DC660EA1C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83DD8FFC-82B4-435F-AD39-9A93589C732B}
+	EndGlobalSection
+EndGlobal

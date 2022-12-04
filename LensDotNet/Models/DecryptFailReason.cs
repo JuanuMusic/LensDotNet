@@ -1,0 +1,16 @@
+namespace LensDotNet.Models
+{
+    public enum DecryptFailReason
+    {
+        UNAUTHORIZED_ADDRESS,
+        DOES_NOT_OWN_NFT,
+        DOES_NOT_OWN_PROFILE,
+        DOES_NOT_FOLLOW_PROFILE,
+        HAS_NOT_COLLECTED_PUBLICATION,
+        UNAUTHORIZED_BALANCE,
+        PROFILE_DOES_NOT_EXIST,
+        MISSING_ENCRYPTION_PARAMS,
+        FOLLOW_NOT_FINALISED_ON_CHAIN,
+        COLLECT_NOT_FINALISED_ON_CHAIN
+    }
+}
