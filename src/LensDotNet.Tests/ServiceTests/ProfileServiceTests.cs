@@ -20,10 +20,8 @@ namespace LensDotNet.Tests.Managers
 		public override void SetUp()
 		{
 			base.SetUp();
-			AuthenticationService auth = new AuthenticationService(Context, address);
-            _credentials = auth.Authorize((challenge) => Utils.Web3Helper.Sign(challenge, pk)).Result;
-			_profileService = new ProfileService(Context, _credentials);
-		}
+            _profileService = new ProfileService(Context);
+        }
 
 		[Test]
 		public async Task ShouldFetchRecommendedProfiles()

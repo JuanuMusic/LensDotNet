@@ -34,7 +34,7 @@ namespace LensDotNet.Core.Extensions
             => await query.AsExecutable(runner).Execute();
 
 		/// <summary>
-		/// All the default fields of the type underlying type of this query.
+		/// Add all the default fields of the underlying type of this query.
 		/// </summary>
 		/// <typeparam name="T">The query underlying type</typeparam>
 		/// <param name="query">The wuery with the default fields added</param>
@@ -45,11 +45,17 @@ namespace LensDotNet.Core.Extensions
 			var defaultFields = ArgumentBuilder.GetDefaultFieldNames(typeof(T));
 
 			foreach(var field in defaultFields)
-				query.AddField(field);
+				query.AddField(field.ToCamelCase());
 
 			return query;
 		}
 
+		/// <summary>
+		/// Add all the default fields of the underlying type of the IEnumerable of this query.
+		/// </summary>
+		/// <typeparam name="T">Underlying type of the IEnumerable</typeparam>
+		/// <param name="query"></param>
+		/// <returns>The query with all the default fields included</returns>
         public static IQuery<IEnumerable<T>> AddDefaultFields<T>(this IQuery<IEnumerable<T>> query)
         {
             var defaultFields = ArgumentBuilder.GetDefaultFieldNames(typeof(T));

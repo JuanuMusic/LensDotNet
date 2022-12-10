@@ -16,14 +16,12 @@ namespace LensDotNet.Tests.ContextTests
                 //                                                              {
                 .AddField(r => r.Items, //                                          items
                     itm => //                                     {
-                        itm.AddField(p => p.Id) //                                      id
-                        .AddField(p => p.Name) //                                       name
-                        .AddField(p => p.Bio) //                                        bio
+                        itm.AddDefaultFields() // ...
                         .AddField(p => p.Attributes, //                                 attributes
-                        bldr => bldr //                                                 {
-                            .AddField((Models.Attribute attr) => attr.Value) //             value
-                            .AddField((Models.Attribute attr) => attr.Key)  //              key
-                        ))    //                                              }   }   }
+                            bldr => bldr //                                                 {
+                                .AddField((Models.Attribute attr) => attr.Value) //             value
+                                .AddField((Models.Attribute attr) => attr.Key)  //              key
+                            ))    //                                              }   }   }
                 .Execute(Context.QueryRunner);
 
             Assert.That(result, Is.Not.Null);
