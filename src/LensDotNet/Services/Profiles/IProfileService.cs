@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LensDotNet.Decorators;
 using LensDotNet.Models;
 using LensDotNet.Models.Modules;
 
@@ -102,7 +103,7 @@ namespace LensDotNet.Services.Profiles
         /// By using this API you inherit all improvements without needing to change code.
         /// </summary>
         /// <returns></returns>
-        public Task<IEnumerable<Profile>> GetRecommendedProfiles();
+        public ExecutableQuery<IEnumerable<Profile>> GetRecommendedProfiles();
 
         /// <summary>
         /// The API right now has basic ways to get popular profiles. It does not support a paging list as of yet.

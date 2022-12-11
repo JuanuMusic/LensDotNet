@@ -7,6 +7,10 @@ using LensDotNet.Core;
 using LensDotNet.Models;
 using LensDotNet.Models.Modules;
 using LensDotNet.Core.Extensions;
+using LensDotNet.Decorators;
+using System.Linq;
+using GraphQL.Query.Builder;
+using System.Dynamic;
 
 namespace LensDotNet.Services.Profiles
 {
@@ -75,15 +79,28 @@ namespace LensDotNet.Services.Profiles
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Profile>> GetRecommendedProfiles()
+        private IQuery<object> FromProfileMediaQuery(IQuery<object> pq)
         {
-            // TODO: Implement options parameter new RecommendedProfileOptions { Shuffle = true }
-            var resp = await _context.RecommendedProfiles(null)
-                .AddDefaultFields()
-                .Execute(_context.QueryRunner);
-            return resp.Result;
+            return pq.AddPossibleType<MediaSet>(
+                            msq => msq.AddField(ms => ms.Original,
+                                oq => oq.AddDefaultFields()))
+                .AddPossibleType<NftImage>(
+                            msq => msq.AddDefaultFields());
         }
 
+        public ExecutableQuery<IEnumerable<Profile>> GetRecommendedProfiles()
+        {
+            // TODO: Implement options parameter new RecommendedProfileOptions { Shuffle = true }
+            var executableQuery = _context.RecommendedProfiles(null)
+                    .AddField(p => p.Name)
+                    .AddField(p => p.Picture,
+                        pq => FromProfileMediaQuery(pq))
+                    .AddField(p => p.CoverPicture,
+                        pq => FromProfileMediaQuery(pq))
+                .AsExecutable(_context.QueryRunner);
+            return ExecutableCollectionQuery<Profile>.From(executableQuery, _context.QueryRunner);
+        }
+        
         public Task<OnChainIdentity> OnChainIdentity(byte[] profileId)
         {
             throw new NotImplementedException();

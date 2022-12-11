@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using GraphQL.Query.Builder;
 using LensDotNet.Core;
@@ -11,31 +13,39 @@ namespace LensDotNet.Decorators
     /// This class acts as a decorator of <see cref="IQuery<T>"/> enabling a query to be executed.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-	public class ExecutableQuery<T> : IQuery<T>, IExecutableQuery<T>
-	{
+	public class ExecutableQuery<T> : IQuery<T>, IExecutableQuery<T> where T : DynamicObject
+    {
         IQuery<T> _internalQuery; // Stores the actual query
         IQueryRunner _queryExecutor; // Takes care of executing queries.
         private string name;
         private IQueryRunner queryRunner;
 
-        public ExecutableQuery(IQuery<T> query, IQueryRunner queryExecutor)
-		{
+        internal ExecutableQuery(IQuery<T> query, IQueryRunner queryExecutor)
+        {
             _internalQuery = query;
             _queryExecutor = queryExecutor;
-		}
+        }
 
-        public ExecutableQuery(string name,  IQueryRunner queryExecutor)
+        public ExecutableQuery(string name, IQueryRunner queryExecutor)
         {
             _internalQuery = new Query<T>(name);
             this.name = name;
             this.queryRunner = queryExecutor;
         }
 
+        public static ExecutableQuery<T> From(IQuery<T> query, IQueryRunner queryExecutor)
+        {
+            if (query is ExecutableQuery<T>)
+                return (ExecutableQuery<T>)query;
+            else
+                return new ExecutableQuery<T>(query, queryExecutor);
+        }
+
         /// <summary>
         /// Executes the query and returns the deserialized result.
         /// </summary>
         /// <returns></returns>
-        public Task<ResultModel<T>> Execute()
+        public virtual Task<ResultModel<T>> Execute()
         {
             string query = _internalQuery.Alias("result").Compile();
             switch (_internalQuery.Type)
@@ -48,6 +58,7 @@ namespace LensDotNet.Decorators
                     throw new NotSupportedException("QueryType not supported.");
             }
         }
+
 
         #region ΙQuery implementation (wrapper for Query).
 
@@ -85,20 +96,24 @@ namespace LensDotNet.Decorators
         public IQuery<T> AddField(string field)
             => new ExecutableQuery<T>(_internalQuery.AddField(field), _queryExecutor);
 
-        public IQuery<T> AddField<TSubSource>(System.Linq.Expressions.Expression<Func<T, TSubSource>> selector, Func<IQuery<TSubSource>, IQuery<TSubSource>> build) where TSubSource : class
+        public IQuery<T> AddField<TSubSource>(System.Linq.Expressions.Expression<Func<T, TSubSource>> selector, Func<IQuery<TSubSource>, IQuery<TSubSource>> build) where TSubSource : DynamicObject
             => new ExecutableQuery<T>(_internalQuery.AddField(selector, build), _queryExecutor);
 
-        public IQuery<T> AddField<TSubSource>(System.Linq.Expressions.Expression<Func<T, IEnumerable<TSubSource>>> selector, Func<IQuery<TSubSource>, IQuery<TSubSource>> build) where TSubSource : class
+        public IQuery<T> AddField<TSubSource>(System.Linq.Expressions.Expression<Func<T, IEnumerable<TSubSource>>> selector, Func<IQuery<TSubSource>, IQuery<TSubSource>> build) where TSubSource : DynamicObject
             => new ExecutableQuery<T>(_internalQuery.AddField(selector, build), _queryExecutor);
 
-        public IQuery<T> AddField<TSubSource>(string field, Func<IQuery<TSubSource>, IQuery<TSubSource>> build) where TSubSource : class
+        public IQuery<T> AddField<TSubSource>(string field, Func<IQuery<TSubSource>, IQuery<TSubSource>> build) where TSubSource : DynamicObject
             => new ExecutableQuery<T>(_internalQuery.AddField(field, build), _queryExecutor);
+
 
         public IQuery<T> AddPossibleType(string type)
             => new ExecutableQuery<T>(_internalQuery.AddPossibleType(type), _queryExecutor);
 
-        public IQuery<T> AddPossibleType<TSubSource>(System.Linq.Expressions.Expression<Func<IQuery<TSubSource>, IQuery<TSubSource>>> build) where TSubSource : class
+        public IQuery<T> AddPossibleType<TSubSource>(System.Linq.Expressions.Expression<Func<IQuery<TSubSource>, IQuery<TSubSource>>> build) where TSubSource : DynamicObject
             => new ExecutableQuery<T>(_internalQuery.AddPossibleType(build), _queryExecutor);
+
+        public IQuery<T> AddPossibleType<TSubSource>(string field, System.Linq.Expressions.Expression<Func<IQuery<TSubSource>, IQuery<TSubSource>>> build) where TSubSource : DynamicObject
+            => new ExecutableQuery<T>(_internalQuery.AddPossibleType(field, build), _queryExecutor);
 
         public IQuery<T> Alias(string alias)
             => new ExecutableQuery<T>(_internalQuery.Alias(alias), _queryExecutor);

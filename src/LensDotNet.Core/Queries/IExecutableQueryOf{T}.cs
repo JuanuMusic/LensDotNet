@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GraphQL.Query.Builder;
 using LensDotNet.Core.Decorators;
@@ -11,11 +12,11 @@ namespace LensDotNet.Decorators
     /// <typeparam name="T"></typeparam>
     public interface IExecutableQuery<T> : IQuery<T>
 	{
-		/// <summary>
-		/// Executes the query and returns the deserialized result.
-		/// </summary>
-		/// <returns></returns>
-		public Task<ResultModel<T>> Execute();
-	}
+        /// <summary>
+        /// Executes the query and returns the deserialized result <see cref="ResultModel{T}"/>.
+        /// </summary>
+        /// <returns></returns>
+        public Task<ResultModel<T>> Execute();
+    }
 }
 

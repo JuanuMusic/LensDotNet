@@ -36,7 +36,7 @@ namespace LensDotNet.CoreTests
             var parameters = ArgumentBuilder.BuildDictionary(request);
             query.AddArguments(new RequestModel<ChallengeRequest>(request));
 
-            var execQuery = new Decorators.ExecutableQuery<AuthChallengeResult>(query, executor);
+            var execQuery = ExecutableQuery<AuthChallengeResult>.From(query, executor);
             var result = await execQuery.Execute();
 
             Assert.That(result, Is.Not.Null);
@@ -63,7 +63,7 @@ namespace LensDotNet.CoreTests
             var parameters = ArgumentBuilder.BuildDictionary(request);
             query.AddArguments(new RequestModel(request));
 
-            var execQuery = new Decorators.ExecutableQuery<PaginatedProfileResult>(query, executor);
+            var execQuery = ExecutableQuery<PaginatedProfileResult>.From(query, executor);
             var result = await execQuery.Execute();
 
             Assert.That(result, Is.Not.Null);

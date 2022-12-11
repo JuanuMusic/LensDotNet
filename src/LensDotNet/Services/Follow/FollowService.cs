@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using LensDotNet.Services.Auth;
 using LensDotNet.Models;
 using LensDotNet.Models.Modules;

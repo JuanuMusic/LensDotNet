@@ -6,7 +6,7 @@ using LensDotNet.Core;
 using LensDotNet.Decorators;
 using LensDotNet.Core.Extensions;
 using LensDotNet.Models;
-using Nethereum.Signer;
+//using Nethereum.Signer;
 using LensDotNet.Core.Queries;
 
 namespace LensDotNet.Services.Auth
@@ -63,8 +63,6 @@ namespace LensDotNet.Services.Auth
 		{
 			var challenge = await GetChallenge();
 			var signature = signChallenge(challenge);
-            var resolvedAddress = new EthereumMessageSigner().EncodeUTF8AndEcRecover(challenge, signature);
-            if (resolvedAddress != _address) throw new Exception($"Invalid signature for address {_address}.");
             return await Authenticate(signature);
 		}
 

@@ -2,8 +2,9 @@ namespace LensDotNet.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Dynamic;
 
-    public partial class Media
+    public partial class Media : DynamicObject
     {
         public string Url { get; set; }
         public int? Width { get; set; }

@@ -2,8 +2,10 @@ namespace LensDotNet.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Dynamic;
+    using GraphQL.Types;
 
-    public partial class NftImage
+    public partial class NftImage : DynamicObject
     {
         public string ContractAddress { get; set; }
         public string TokenId { get; set; }

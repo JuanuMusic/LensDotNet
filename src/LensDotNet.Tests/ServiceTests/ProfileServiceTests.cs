@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using LensDotNet.Managers;
@@ -7,7 +8,7 @@ using LensDotNet.Models;
 using LensDotNet.Services.Auth;
 using LensDotNet.Services.Profiles;
 
-namespace LensDotNet.Tests.Managers
+namespace LensDotNet.Tests.ServiceTests
 {
 	public class ProfileServiceTests : BaseContextTest
 	{
@@ -26,10 +27,13 @@ namespace LensDotNet.Tests.Managers
 		[Test]
 		public async Task ShouldFetchRecommendedProfiles()
 		{
-			IEnumerable<Profile> profiles = await _profileService.GetRecommendedProfiles();
+			var profilesQuery = _profileService.GetRecommendedProfiles();
+			var profiles = await profilesQuery.Execute();
 			Assert.That(profiles, Is.Not.Null);
-			Assert.That(profiles.Count(), Is.GreaterThan(0));
-		}
+            Assert.That(profiles.Result, Is.Not.Null);
+            Assert.That(profiles.Result.Count(), Is.GreaterThan(0));
+            Assert.That(profiles.Result.First().Picture, Is.Not.Null);
+        }
 	}
 }
 

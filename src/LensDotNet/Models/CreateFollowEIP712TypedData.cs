@@ -2,7 +2,7 @@ namespace LensDotNet.Models
 {
     using System;
     using System.Collections.Generic;
-    using Nethereum.ABI.FunctionEncoding.Attributes;
+    //using Nethereum.ABI.FunctionEncoding.Attributes;
 
     public partial class CreateFollowEIP712TypedData
     {

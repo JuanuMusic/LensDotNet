@@ -2,6 +2,13 @@ namespace LensDotNet.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Dynamic;
+    using Newtonsoft.Json;
+
+    class AKindOfPicture
+    {
+
+    }
 
     public partial class Profile
     {
@@ -11,8 +18,8 @@ namespace LensDotNet.Models
         public string FollowNftAddress { get; set; }
         public string Metadata { get; set; }
         public string Handle { get; set; }
-        public ProfileMedia Picture { get; set; }
-        public ProfileMedia CoverPicture { get; set; }
+        public DynamicObject Picture { get; set; }
+        public DynamicObject CoverPicture { get; set; }
         public string OwnedBy { get; set; }
         public Dispatcher Dispatcher { get; set; }
         public ProfileStats Stats { get; set; }
@@ -23,5 +30,20 @@ namespace LensDotNet.Models
         public List<string> Interests { get; set; }
         public bool IsFollowedByMe { get; set; }
         public bool IsFollowing { get; set; }
+    }
+
+    public static class UnionExtensions
+    {
+        public static T As<T>(this ExpandoObject input) where T : class
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(input));
+
+            } catch (Exception es)
+            {
+                return null;
+            }
+        }
     }
 }

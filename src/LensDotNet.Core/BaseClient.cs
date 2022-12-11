@@ -19,6 +19,7 @@ namespace LensDotNet.Core
         {
             var client = new GraphQLHttpClient(baseUrl, new NewtonsoftJsonSerializer());
             _queryRunner = new QueryRunner(client);
+            
         }
 
         public BaseClient(GraphQLHttpClient httpClient)

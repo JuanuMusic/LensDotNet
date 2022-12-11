@@ -85,22 +85,19 @@ namespace LensDotNet.Contexts
 
         public ExecutableQuery<GenerateModuleCurrencyApproval> GenerateModuleCurrencyApprovalData(GenerateModuleCurrencyApprovalDataRequest request)
         {
-            var parameterValues = new object[] { request };
-            return QueryFactory.BuildQuery<GenerateModuleCurrencyApproval>(parameterValues, "generateModuleCurrencyApprovalData")
+            return QueryFactory.BuildQuery<GenerateModuleCurrencyApproval, GenerateModuleCurrencyApprovalDataRequest>(request, "generateModuleCurrencyApprovalData")
                 .AsExecutable(QueryRunner);
         }
 
         public ExecutableQuery<EnabledModules> EnabledModules()
         {
-            var parameterValues = new object[] { };
-            return QueryFactory.BuildQuery<EnabledModules>(parameterValues, "enabledModules")
+            return QueryFactory.BuildQuery<EnabledModules, object>(null, "enabledModules")
                 .AsExecutable(QueryRunner);
         }
 
         public ExecutableQuery<EnabledModules> UnknownEnabledModules()
         {
-            var parameterValues = new object[] { };
-            return QueryFactory.BuildQuery<EnabledModules>(parameterValues, "unknownEnabledModules")
+            return QueryFactory.BuildQuery<EnabledModules, object?>(null, "unknownEnabledModules")
                 .AsExecutable(QueryRunner);
         }
 
@@ -134,16 +131,15 @@ namespace LensDotNet.Contexts
                 .AsExecutable(QueryRunner);
         }
 
-        public ExecutableQuery<IEnumerable<Profile>> RecommendedProfiles(RecommendedProfileOptions? options)
+        public ExecutableCollectionQuery<Profile> RecommendedProfiles(RecommendedProfileOptions? options)
         {
-            return QueryFactory.BuildQuery<IEnumerable<Profile>, RecommendedProfileOptions?>(options, "recommendedProfiles")
-                .AsExecutable(QueryRunner);
+            return QueryFactory.BuildCollectionQuery<Profile, RecommendedProfileOptions?>(options, "recommendedProfiles")
+                   .AsExecutable(QueryRunner);
         }
 
         public ExecutableQuery<Profile> DefaultProfile(DefaultProfileRequest request)
         {
-            var parameterValues = new object[] { request };
-            return QueryFactory.BuildQuery<Profile>(parameterValues, "defaultProfile")
+            return QueryFactory.BuildQuery<Profile, DefaultProfileRequest>(request, "defaultProfile")
                 .AsExecutable(QueryRunner);
         }
 

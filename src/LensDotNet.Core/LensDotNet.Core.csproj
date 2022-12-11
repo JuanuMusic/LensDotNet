@@ -11,15 +11,19 @@
     <None Remove="Queries\" />
     <None Remove="GraphQL.Client.Serializer.Newtonsoft" />
     <None Remove="Extensions\" />
+    <None Remove="Utils\" />
+    <None Remove="GraphQL" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Decorators\" />
     <Folder Include="Queries\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="GraphQL.Client" Version="5.1.0" />
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="5.1.0" />
+    <PackageReference Include="GraphQL" Version="7.2.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\graphql-query-builder-dotnet\src\GraphQL.Query.Builder\GraphQL.Query.Builder.csproj" />

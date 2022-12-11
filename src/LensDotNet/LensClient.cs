@@ -5,7 +5,7 @@ using LensDotNet.Services.Auth;
 using LensDotNet.Services.Follow;
 using LensDotNet.Core;
 using LensDotNet.Models;
-using Nethereum.ABI.EIP712;
+//using Nethereum.ABI.EIP712;
 
 namespace LensDotNet
 {

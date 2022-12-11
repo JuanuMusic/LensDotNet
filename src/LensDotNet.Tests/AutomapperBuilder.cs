@@ -9,7 +9,7 @@ using LensDotNet.Models;
 using Nethereum.ABI.EIP712;
 using Nethereum.Contracts.Standards.ERC20.TokenList;
 
-namespace LensDotNet
+namespace LensDotNet.Tests
 {
     public static class AutomapperBuilder
     {
