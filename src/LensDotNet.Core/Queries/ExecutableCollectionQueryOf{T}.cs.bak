@@ -13,7 +13,7 @@ namespace LensDotNet.Decorators
     /// This class acts as a decorator of <see cref="IQuery<T>"/> enabling a query to be executed.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-	public class ExecutableCollectionQuery<T> : ExecutableQuery<IEnumerable<T>> where T : DynamicObject
+	private class ExecutableCollectionQuery<T> : ExecutableQuery<IEnumerable<T>> where T : DynamicObject
     {
         IQuery<T> _internalQuery; // Stores the actual query
         IQueryRunner _queryExecutor; // Takes care of executing queries.

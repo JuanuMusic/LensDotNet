@@ -81,7 +81,7 @@ namespace LensDotNet.Decorators
         public IQuery<T> AddArgument(string key, object value)
             => new ExecutableQuery<T>(_internalQuery.AddArgument(key, value), _queryExecutor);
 
-        public IQuery<T> AddArguments(Dictionary<string, object> arguments)
+        public IQuery<T>    AddArguments(Dictionary<string, object> arguments)
             => new ExecutableQuery<T>(_internalQuery.AddArguments(arguments), _queryExecutor);
 
         public IQuery<T> AddArguments<TArguments>(TArguments arguments) where TArguments : class

@@ -11,45 +11,45 @@ using GraphQL.Query.Builder;
 using LensDotNet.Core.Decorators;
 using LensDotNet.Core.Queries;
 using LensDotNet.Core.Utils;
-using LensDotNet.Decorators;
+//using LensDotNet.Decorators;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace LensDotNet.Core.Extensions
 {
     public static class QueryExtensions
     {
-        /// <summary>
-        /// Convert a <see cref="Query{T}"/> into an <see cref="ExecutableQuery{T}"/> passing an <see cref="IQueryRunner"/>
-        /// </summary>
-        /// <typeparam name="T">The underlying type of the query.</typeparam>
-        /// <param name="query">Source query</param>
-        /// <param name="runner">The runnet to use for executions on this query.</param>
-        /// <returns></returns>
-        public static ExecutableQuery<T> AsExecutable<T>(this IQuery<T> query, IQueryRunner runner)
-            => ExecutableQuery<T>.From(query, runner);
+        ///// <summary>
+        ///// Convert a <see cref="Query{T}"/> into an <see cref="ExecutableQuery{T}"/> passing an <see cref="IQueryRunner"/>
+        ///// </summary>
+        ///// <typeparam name="T">The underlying type of the query.</typeparam>
+        ///// <param name="query">Source query</param>
+        ///// <param name="runner">The runnet to use for executions on this query.</param>
+        ///// <returns></returns>
+        //public static ExecutableQuery<T> AsExecutable<T>(this IQuery<T> query, IQueryRunner runner)
+        //    => ExecutableQuery<T>.From(query, runner);
 
-        /// <summary>
-        /// Convert a <see cref="Query{T}"/> into an <see cref="ExecutableQuery{T}"/> passing an <see cref="IQueryRunner"/>
-        /// </summary>
-        /// <typeparam name="T">The underlying type of the query.</typeparam>
-        /// <param name="query">Source query</param>
-        /// <param name="runner">The runnet to use for executions on this query.</param>
-        /// <returns></returns>
-        public static ExecutableCollectionQuery<T> AsExecutable<T>(this IQuery<IEnumerable<T>> query, IQueryRunner runner)
-            => ExecutableCollectionQuery<T>.From(query, runner);
-
+        ///// <summary>
+        ///// Convert a <see cref="Query{T}"/> into an <see cref="ExecutableQuery{T}"/> passing an <see cref="IQueryRunner"/>
+        ///// </summary>
+        ///// <typeparam name="T">The underlying type of the query.</typeparam>
+        ///// <param name="query">Source query</param>
+        ///// <param name="runner">The runnet to use for executions on this query.</param>
+        ///// <returns></returns>
         //public static ExecutableCollectionQuery<T> AsExecutable<T>(this IQuery<IEnumerable<T>> query, IQueryRunner runner)
         //    => ExecutableCollectionQuery<T>.From(query, runner);
 
-        /// <summary>
-        /// Convert a <see cref="Query{T}"/> into an <see cref="ExecutableQuery{T}"/> passing an <see cref="IQueryRunner"/>
-        /// </summary>
-        /// <typeparam name="T">The underlying type of the query.</typeparam>
-        /// <param name="query">Source query</param>
-        /// <param name="runner">The runnet to use for executions on this query.</param>
-        /// <returns></returns>
-        public static async Task<ResultModel<T>> Execute<T>(this IQuery<T> query, IQueryRunner runner) where T : DynamicObject
-            => await query.AsExecutable(runner).Execute();
+        ////public static ExecutableCollectionQuery<T> AsExecutable<T>(this IQuery<IEnumerable<T>> query, IQueryRunner runner)
+        ////    => ExecutableCollectionQuery<T>.From(query, runner);
+
+        ///// <summary>
+        ///// Convert a <see cref="Query{T}"/> into an <see cref="ExecutableQuery{T}"/> passing an <see cref="IQueryRunner"/>
+        ///// </summary>
+        ///// <typeparam name="T">The underlying type of the query.</typeparam>
+        ///// <param name="query">Source query</param>
+        ///// <param name="runner">The runnet to use for executions on this query.</param>
+        ///// <returns></returns>
+        //public static async Task<ResultModel<T>> Execute<T>(this IQuery<T> query, IQueryRunner runner) where T : DynamicObject
+        //    => await query.AsExecutable(runner).Execute();
 
         /// <summary>Adds a field to a collection query.</summary>
         /// <typeparam name="TProperty">The property type.</typeparam>
@@ -97,16 +97,6 @@ namespace LensDotNet.Core.Extensions
                 query.AddField(field.ToCamelCase());
 
             return query;
-        }
-
-        /// <summary>
-        /// Executes the query and returns the deserialized result <see cref="ResultModel{IEnumerable{TSource}}"/>
-        /// </summary>
-        /// <returns>An <see cref="ResultModel{IEnumerable{TSource}}"/>.</returns>
-        public static async Task<ResultModel<IEnumerable<TSource>>> Execute<TSource>(this IQuery<TSource> inQuery, IQueryRunner runner)
-        {
-            var query = ExecutableCollectionQuery<TSource>.From(inQuery, runner);
-            return await query.ExecuteAsCollection();
         }
 
     }

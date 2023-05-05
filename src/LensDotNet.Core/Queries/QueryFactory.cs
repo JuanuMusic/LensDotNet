@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using GraphQL.Query.Builder;
 using LensDotNet.Core.Decorators;
-using LensDotNet.Decorators;
+//using LensDotNet.Decorators;
 
 namespace LensDotNet.Core.Queries
 {
