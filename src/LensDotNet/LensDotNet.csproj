@@ -52,11 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="GraphQL.Client" Version="5.1.0" />
-    <PackageReference Include="GraphQL" Version="7.2.1" />
+    <PackageReference Include="GraphQL" Version="7.2.2" />
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="5.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\graphql-query-builder-dotnet\src\GraphQL.Query.Builder\GraphQL.Query.Builder.csproj" />
     <ProjectReference Include="..\LensDotNet.Core\LensDotNet.Core.csproj" />
   </ItemGroup>
 </Project>

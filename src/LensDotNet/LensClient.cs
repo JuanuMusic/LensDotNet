@@ -11,6 +11,18 @@ namespace LensDotNet
 {
     public class LensClient : ContextualizedObject, ILensClient
     {
+        public static void Init()
+        {
+            var builder = Host.CreateDefaultBuilder(args);
+
+            builder.ConfigureServices(
+                services =>
+            services.AddHostedService<Worker>()
+                .AddScoped<IMessageWriter, MessageWriter>());
+
+            using var host = builder.Build();
+        }
+
         private Credentials? _credentials;
 
         private FollowService _followService;
@@ -29,7 +41,16 @@ namespace LensDotNet
         /// Creates a new instance of the LensClient, passing the network to use. Default is <see cref="Network.MumbaiTestnet"/>.
         /// </summary>
         /// <param name="network">The Network to use</param>
-        public LensClient(Network network) : base(network) {}
+        public LensClient(IServiceProvider serviceProvider, Network network) : base(network) {
+            var builder = Host.CreateDefaultBuilder(args);
+
+            builder.ConfigureServices(
+                services =>
+            services.AddHostedService<Worker>()
+                .AddScoped<IMessageWriter, MessageWriter>());
+
+            using var host = builder.Build();
+        }
 
         #region AUTH STUFF
 

@@ -26,17 +26,8 @@ namespace LensDotNet.Core.Extensions
         /// <param name="runner">The runnet to use for executions on this query.</param>
         /// <returns></returns>
         public static ExecutableQuery<T> AsExecutable<T>(this IQuery<T> query, IQueryRunner runner)
+            where T : DynamicObject
             => ExecutableQuery<T>.From(query, runner);
-
-        /// <summary>
-        /// Convert a <see cref="Query{T}"/> into an <see cref="ExecutableQuery{T}"/> passing an <see cref="IQueryRunner"/>
-        /// </summary>
-        /// <typeparam name="T">The underlying type of the query.</typeparam>
-        /// <param name="query">Source query</param>
-        /// <param name="runner">The runnet to use for executions on this query.</param>
-        /// <returns></returns>
-        public static ExecutableCollectionQuery<T> AsExecutable<T>(this IQuery<IEnumerable<T>> query, IQueryRunner runner)
-            => ExecutableCollectionQuery<T>.From(query, runner);
 
         //public static ExecutableCollectionQuery<T> AsExecutable<T>(this IQuery<IEnumerable<T>> query, IQueryRunner runner)
         //    => ExecutableCollectionQuery<T>.From(query, runner);
@@ -103,11 +94,12 @@ namespace LensDotNet.Core.Extensions
         /// Executes the query and returns the deserialized result <see cref="ResultModel{IEnumerable{TSource}}"/>
         /// </summary>
         /// <returns>An <see cref="ResultModel{IEnumerable{TSource}}"/>.</returns>
-        public static async Task<ResultModel<IEnumerable<TSource>>> Execute<TSource>(this IQuery<TSource> inQuery, IQueryRunner runner)
-        {
-            var query = ExecutableCollectionQuery<TSource>.From(inQuery, runner);
-            return await query.ExecuteAsCollection();
-        }
+        //public static async Task<ResultModel<TSource>> Execute<TSource>(this IQuery<TSource> inQuery, IQueryRunner runner)
+        //    where TSource : DynamicObject
+        //{
+        //    var query = ExecutableCollectionQuery<TSource>.From(inQuery, runner);
+        //    return await query.ExecuteAsCollection();
+        //}
 
     }
 }

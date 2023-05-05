@@ -84,7 +84,7 @@ namespace LensDotNet.Decorators
         public IQuery<T> AddArguments(Dictionary<string, object> arguments)
             => new ExecutableQuery<T>(_internalQuery.AddArguments(arguments), _queryExecutor);
 
-        public IQuery<T> AddArguments<TArguments>(TArguments arguments) where TArguments : class
+        public IQuery<T> AddArguments<TArguments>(TArguments arguments) where TArguments : DynamicObject
             => new ExecutableQuery<T>(_internalQuery.AddArguments(arguments), _queryExecutor);
 
         public IQuery<T> AddField<TProperty>(System.Linq.Expressions.Expression<Func<T, IEnumerable<TProperty>>> selector)
@@ -112,7 +112,8 @@ namespace LensDotNet.Decorators
         public IQuery<T> AddPossibleType<TSubSource>(System.Linq.Expressions.Expression<Func<IQuery<TSubSource>, IQuery<TSubSource>>> build) where TSubSource : DynamicObject
             => new ExecutableQuery<T>(_internalQuery.AddPossibleType(build), _queryExecutor);
 
-        public IQuery<T> AddPossibleType<TSubSource>(string field, System.Linq.Expressions.Expression<Func<IQuery<TSubSource>, IQuery<TSubSource>>> build) where TSubSource : DynamicObject
+        public IQuery<T> AddPossibleType<TSubSource>(string field, System.Linq.Expressions.Expression<Func<IQuery<TSubSource>, IQuery<TSubSource>>> build)
+            where TSubSource : DynamicObject
             => new ExecutableQuery<T>(_internalQuery.AddPossibleType(field, build), _queryExecutor);
 
         public IQuery<T> Alias(string alias)

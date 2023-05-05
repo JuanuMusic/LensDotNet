@@ -43,11 +43,6 @@
     <None Remove="AutoMapper" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LensDotNet.Core\LensDotNet.Core.csproj" />
-    <ProjectReference Include="..\LensDotNet\LensDotNet.csproj" />
-    <ProjectReference Include="..\..\..\graphql-query-builder-dotnet\src\GraphQL.Query.Builder\GraphQL.Query.Builder.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Utils\" />
     <Folder Include="ContextTests\" />
     <Folder Include="LensClientTests\" />

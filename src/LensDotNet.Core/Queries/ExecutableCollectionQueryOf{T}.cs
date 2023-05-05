@@ -13,14 +13,14 @@ namespace LensDotNet.Decorators
     /// This class acts as a decorator of <see cref="IQuery<T>"/> enabling a query to be executed.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-	public class ExecutableCollectionQuery<T> : ExecutableQuery<IEnumerable<T>> where T : DynamicObject
+	public class ExecutableCollectionQuery<T> : ExecutableQuery<T> where T : DynamicObject
     {
         IQuery<T> _internalQuery; // Stores the actual query
         IQueryRunner _queryExecutor; // Takes care of executing queries.
         private string name;
         private IQueryRunner queryRunner;
 
-        private ExecutableCollectionQuery(IQuery<IEnumerable<T>> query, IQueryRunner queryExecutor) : base(query, queryExecutor)
+        private ExecutableCollectionQuery(IQuery<T> query, IQueryRunner queryExecutor) : base(query, queryExecutor)
         {
             _internalQuery = query;
             _queryExecutor = queryExecutor;
@@ -45,26 +45,26 @@ namespace LensDotNet.Decorators
         /// Executes the query and returns the deserialized result.
         /// </summary>
         /// <returns></returns>
-        public override async Task<ResultModel<IEnumerable<T>>> Execute()
-            => await ExecuteAsCollection();
+        private new async Task<ResultModel<T>> Execute()
+            => throw new InvalidOperationException("Use ExecuteAsCollexrtion");
 
-        /// <summary>
-        /// Executes the query and returns the deserialized result <see cref="ResultModel{IEnumerable{T}}"/>
-        /// </summary>
-        /// <returns>An <see cref="ResultModel{IEnumerable{T}}"/>.</returns>
-        public Task<ResultModel<IEnumerable<T>>> ExecuteAsCollection()
-        {
-            string query = _internalQuery.Alias("result").Compile();
-            switch (_internalQuery.Type)
-            {
-                case QueryType.Query:
-                    return _queryExecutor.ExecuteQuery<ResultModel<IEnumerable<T>>>(query);
-                case QueryType.Mutation:
-                    return _queryExecutor.ExecuteMutation<ResultModel<IEnumerable<T>>>(query);
-                default:
-                    throw new NotSupportedException("QueryType not supported.");
-            }
-        }
+        ///// <summary>
+        ///// Executes the query and returns the deserialized result <see cref="ResultModel{IEnumerable{T}}"/>
+        ///// </summary>
+        ///// <returns>An <see cref="ResultModel{IEnumerable{T}}"/>.</returns>
+        //public Task<ResultModel<T>> ExecuteAsCollection()
+        //{
+        //    string query = _internalQuery.Alias("result").Compile();
+        //    switch (_internalQuery.Type)
+        //    {
+        //        case QueryType.Query:
+        //            return _queryExecutor.ExecuteQuery<ResultModel<T>>(query);
+        //        case QueryType.Mutation:
+        //            return _queryExecutor.ExecuteMutation<ResultModel<T>>(query);
+        //        default:
+        //            throw new NotSupportedException("QueryType not supported.");
+        //    }
+        //}
 
         #region ΙQuery implementation (wrapper for Query).
 
