@@ -5,20 +5,20 @@ using LensDotNet.Authentication;
 using LensDotNet.Client.Authentication;
 using LensDotNet.Client.Models.Requests;
 using LensDotNet.Client.Models.Responses;
-using LensDotNet.Client.Profile.GQL;
 using LensDotNet.Config;
 using LensDotNet.Models.Auth;
 using LensDotNet.Models.Profile;
 using LensDotNet.Core;
+using LensDotNet.Client.Profile.GQL;
 
 namespace LensDotNet.Client.Profile
 {
     public class ProfileClient
     {
-        private readonly LensAuthentication? _authentication;
+        private readonly AuthenticationClient? _authentication;
         private readonly GraphQLHttpClient _client;
 
-        public ProfileClient(LensConfig config, LensAuthentication? authentication = null)
+        public ProfileClient(LensConfig config, AuthenticationClient? authentication = null)
         {
             _authentication = authentication;
             _client = new GraphQLHttpClient(new GraphQLHttpClientOptions
@@ -27,7 +27,7 @@ namespace LensDotNet.Client.Profile
             }, new NewtonsoftJsonSerializer());
         }
 
-        public async Task<ProfileFragment> Fetch(SingleProfileRequest profileRequest, string? observerId)
+        public async Task<ProfileFragment> Fetch(SingleProfileRequest profileRequest, string? observerId = null)
         {
             var request = new GraphQLRequest(ProfileQueries.Profile, new { request = profileRequest });
             var result = await _client.SendQueryAsync<ApiResponse<ProfileFragment>>(request);

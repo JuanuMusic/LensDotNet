@@ -12,12 +12,12 @@ namespace LensDotNet
 {
     public class LensClient
     {
-        private readonly LensAuthentication _authentication;
+        private readonly AuthenticationClient _authentication;
         private readonly LensConfig _config;
 
         public LensClient(LensConfig config)
         {
-            _authentication = new LensAuthentication(config);
+            _authentication = new AuthenticationClient(config);
             _config = config;
         }
 

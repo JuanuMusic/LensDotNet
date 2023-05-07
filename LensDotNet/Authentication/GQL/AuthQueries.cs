@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LensDotNet.Core.Adapters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,7 +16,7 @@ namespace LensDotNet.Client.Authentication
             get
             {
                 if (string.IsNullOrWhiteSpace(_authenticate))
-                    _authenticate = Queries.GetQueryFromResource("LensDotNet.Client.Authentication.GQL.authenticate.gql");
+                    _authenticate = QueryCompiler.CompileResource("LensDotNet.Client.Authentication.GQL.authenticate.gql");
                 return _authenticate;
             }
         }
@@ -26,7 +27,7 @@ namespace LensDotNet.Client.Authentication
             get
             {
                 if (string.IsNullOrWhiteSpace(_challenge))
-                    _challenge = Queries.GetQueryFromResource("LensDotNet.Client.Authentication.GQL.challenge.gql");
+                    _challenge = QueryCompiler.CompileResource("LensDotNet.Client.Authentication.GQL.challenge.gql");
                 return _challenge;
             }
         }
@@ -37,7 +38,7 @@ namespace LensDotNet.Client.Authentication
             get
             {
                 if (string.IsNullOrWhiteSpace(_verify))
-                    _verify = Queries.GetQueryFromResource("LensDotNet.Client.Authentication.GQL.verify.gql");
+                    _verify = QueryCompiler.CompileResource("LensDotNet.Client.Authentication.GQL.verify.gql");
                 return _verify;
             }
         }
@@ -47,7 +48,7 @@ namespace LensDotNet.Client.Authentication
             get
             {
                 if (string.IsNullOrWhiteSpace(_refresh))
-                    _refresh = Queries.GetQueryFromResource("LensDotNet.Client.Authentication.GQL.refresh.gql");
+                    _refresh = QueryCompiler.CompileResource("LensDotNet.Client.Authentication.GQL.refresh.gql");
                 return _refresh;
             }
         }

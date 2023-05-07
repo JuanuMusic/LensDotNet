@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LensDotNet.Core.Adapters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -9,26 +10,16 @@ namespace LensDotNet.Client
 {
     public static class Queries
     {
-        public static string? GetQueryFromResource(string resourcePath)
+        private static string? _fragments;
+        public static string? Fragments
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            string? retVal = null;
-            using (Stream? stream = assembly.GetManifestResourceStream(resourcePath))
+            get
             {
-                if (stream != null)
-                {
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        retVal = reader.ReadToEnd();
-                    }
-                }
-                else
-                {
-                    throw new KeyNotFoundException("Could not find embbeded resource " + resourcePath);
-                }
+                if (string.IsNullOrWhiteSpace(_fragments))
+                    _fragments = QueryCompiler.CompileResource("LensDotNet.Client.GQL.fragments.gql");
+                return _fragments;
             }
-
-            return retVal;
         }
+       
     }
 }

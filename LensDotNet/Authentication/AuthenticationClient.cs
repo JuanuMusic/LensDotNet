@@ -5,19 +5,19 @@ using System.Net.Sockets;
 
 namespace LensDotNet.Authentication
 {
-    public interface ILensAuthentication
+    public interface IAuthenticationClient
     {
         public Task<Challenge?> GenerateChallenge(string address);
         public Task Authenticate(string address, string signature);
         public Task<bool> IsAuthenticated();
     }
 
-    public class LensAuthentication : ILensAuthentication
+    public class AuthenticationClient : IAuthenticationClient
     {
         private readonly ILensAuthenticationApi _api;
         private CredentialsAdapter _credentials;
 
-        public LensAuthentication(LensConfig config)
+        public AuthenticationClient(LensConfig config)
             => _api = new LensAuthenticationApi(new Uri(config.GqlEndpoint));
 
         public async Task Authenticate(string address, string signature)

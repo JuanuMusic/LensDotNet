@@ -14,13 +14,12 @@ namespace LensDotNet.Tests.Client.Authentication
 {
     public class AuthenticationTest
     {
-        private readonly static LensConfig DEV_CONFIG = new LensConfig(LensConfig.DEVELOPMENT_GQL_ENDPOINT);
         private readonly static Account _account = new Account(Web3Helper.TEST_PK);
 
         [Test]
         public async Task ChallengeShouldReturnChallengeForAddress()
         {
-            var authApi = new LensAuthentication(DEV_CONFIG);
+            var authApi = new AuthenticationClient(TestConfigs.DEV_CONFIG);
             var challenge = await authApi.GenerateChallenge(_account.Address);
             Assert.IsNotNull(challenge);
             Assert.That(challenge.Text.Contains("Sign in with ethereum to lens"));
@@ -29,7 +28,7 @@ namespace LensDotNet.Tests.Client.Authentication
         [Test]
         public async Task TestIsAuthenticatedReturnsFalseWhenNoCredentials()
         {
-            var authApi = new LensAuthentication(DEV_CONFIG);
+            var authApi = new AuthenticationClient(TestConfigs.DEV_CONFIG);
             Assert.IsFalse(await authApi.IsAuthenticated());
         }
 
@@ -42,7 +41,7 @@ namespace LensDotNet.Tests.Client.Authentication
         [Test]
         public async Task TestIsAuthenticatedShouldReturnTrueWithValidCredentials()
         {
-            var authApi = new LensAuthentication(DEV_CONFIG);
+            var authApi = new AuthenticationClient(TestConfigs.DEV_CONFIG);
             var challenge = await authApi.GenerateChallenge(_account.Address);
             var signed = Web3Helper.Sign(challenge.Text, _account);
             await authApi.Authenticate(_account.Address, signed);

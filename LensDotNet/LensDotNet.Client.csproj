@@ -1,16 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<StrawberryShake_State>$(MSBuildProjectExtensionsPath)berry</StrawberryShake_State>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Authentication\GQL\Authenticate.gql" />
     <None Remove="Authentication\GQL\challenge.gql" />
     <None Remove="Authentication\GQL\refresh.gql" />
     <None Remove="Authentication\GQL\verify.gql" />
+    <None Remove="GQL\fragments.gql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="GQL\fragments.gql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,18 +22,41 @@
     <EmbeddedResource Include="Authentication\GQL\challenge.gql" />
     <EmbeddedResource Include="Authentication\GQL\refresh.gql" />
     <EmbeddedResource Include="Authentication\GQL\verify.gql" />
+    <EmbeddedResource Include="GQL\fragments.gql" />
+    <GraphQLConfig Include="schema.extensions.graphql" />
+    <GraphQLConfig Include="schema.graphql" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="GraphQL.Client" Version="6.0.0" />
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     <PackageReference Include="Nethereum.HdWallet" Version="4.14.0" />
+    <PackageReference Include="StrawberryShake" Version="13.0.5" />
+    <PackageReference Include="StrawberryShake.CodeGeneration.CSharp.Analyzers" Version="12.18.0" />
+    <PackageReference Include="StrawberryShake.Transport.Http" Version="13.0.5" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LensDotNet.Core\LensDotNet.Core.csproj" />
     <ProjectReference Include="..\LensDotNet.Models\LensDotNet.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="Profile\GQL\profile.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <GraphQLConfig Include="Profile\GQL\profile.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="schema.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="schema.extensions.graphql" />
   </ItemGroup>
 
 </Project>

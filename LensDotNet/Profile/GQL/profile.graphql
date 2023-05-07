@@ -1,0 +1,136 @@
+fragment Attribute on Attribute {
+  __typename
+  displayType
+  key
+  value
+}
+
+fragment RevertFollowModuleSettings on RevertFollowModuleSettings {
+  __typename
+  contractAddress
+}
+
+fragment ProfileFollowModuleSettings on ProfileFollowModuleSettings {
+  __typename
+  contractAddress
+}
+
+fragment UnknownFollowModuleSettings on UnknownFollowModuleSettings {
+  __typename
+  contractAddress
+}
+
+fragment FeeFollowModuleSettings on FeeFollowModuleSettings {
+  __typename
+  amount {
+    ...ModuleFeeAmount
+  }
+  contractAddress
+  recipient
+}
+
+fragment Erc20 on Erc20 {
+  __typename
+  name
+  symbol
+  decimals
+  address
+}
+
+fragment ModuleFeeAmount on ModuleFeeAmount {
+  __typename
+  asset {
+    ...Erc20
+  }
+  value
+}
+
+fragment Media on Media {
+  __typename
+  altTag
+  cover
+  mimeType
+  url
+}
+
+fragment MediaSet on MediaSet {
+  __typename
+  original {
+    ...Media
+  }
+}
+
+query Profile($request: SingleProfileQueryRequest!, $observerId: ProfileId) {
+  result: profile(request: $request) {
+    __typename
+  id
+  name
+  bio
+  handle
+  ownedBy
+  interests
+
+  picture {
+    ... on NftImage {
+      __typename
+      contractAddress
+      tokenId
+      uri
+      verified
+    }
+
+    ... on MediaSet {
+      ...MediaSet
+    }
+  }
+
+  coverPicture {
+    ... on NftImage {
+      __typename
+      contractAddress
+      tokenId
+      uri
+      verified
+    }
+
+    ... on MediaSet {
+      ...MediaSet
+    }
+  }
+
+  stats {
+    __typename
+    totalFollowers
+    totalFollowing
+    totalPosts
+  }
+
+  followModule {
+    ... on FeeFollowModuleSettings {
+      ...FeeFollowModuleSettings
+    }
+    ... on ProfileFollowModuleSettings {
+      ...ProfileFollowModuleSettings
+    }
+    ... on RevertFollowModuleSettings {
+      ...RevertFollowModuleSettings
+    }
+    ... on UnknownFollowModuleSettings {
+      ...UnknownFollowModuleSettings
+    }
+  }
+
+  attributes {
+    ...Attribute
+  }
+
+  dispatcher {
+    address
+    canUseRelay
+  }
+
+  isDefault
+  isFollowedByMe(isFinalisedOnChain: true)
+  isFollowing(who: $observerId)
+  }
+}
