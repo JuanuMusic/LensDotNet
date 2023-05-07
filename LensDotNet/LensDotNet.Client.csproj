@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Authentication\GQL\Authenticate.gql" />
+    <None Remove="Authentication\GQL\challenge.gql" />
+    <None Remove="Authentication\GQL\refresh.gql" />
+    <None Remove="Authentication\GQL\verify.gql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Authentication\GQL\authenticate.gql" />
+    <EmbeddedResource Include="Authentication\GQL\challenge.gql" />
+    <EmbeddedResource Include="Authentication\GQL\refresh.gql" />
+    <EmbeddedResource Include="Authentication\GQL\verify.gql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL.Client" Version="6.0.0" />
+    <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.0.0" />
+    <PackageReference Include="Nethereum.HdWallet" Version="4.14.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LensDotNet.Core\LensDotNet.Core.csproj" />
+    <ProjectReference Include="..\LensDotNet.Models\LensDotNet.Models.csproj" />
+  </ItemGroup>
+
+</Project>
