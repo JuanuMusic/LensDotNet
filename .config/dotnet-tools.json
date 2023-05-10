@@ -2,10 +2,10 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "strawberryshake.tools": {
-      "version": "13.0.5",
+    "zeroql.cli": {
+      "version": "3.6.1",
       "commands": [
-        "dotnet-graphql"
+        "zeroql"
       ]
     }
   }

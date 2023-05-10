@@ -2,13 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensDotNet.Client", "LensDotNet\LensDotNet.Client.csproj", "{A409381B-F0DC-4ED9-B790-6DCB4BA51D55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensDotNet.Client", "LensDotNet\LensDotNet.Client.csproj", "{A409381B-F0DC-4ED9-B790-6DCB4BA51D55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensDotNet.Models", "LensDotNet.Models\LensDotNet.Models.csproj", "{D6587D35-798F-4049-9C5F-FC7BF0DB580F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensDotNet.Tests", "LensDotNet.Client.Tests\LensDotNet.Tests.csproj", "{CE3D14DD-A104-4CC4-BD4D-B322E00BD2FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensDotNet.Tests", "LensDotNet.Client.Tests\LensDotNet.Tests.csproj", "{CE3D14DD-A104-4CC4-BD4D-B322E00BD2FA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensDotNet.Core", "LensDotNet.Core\LensDotNet.Core.csproj", "{76D012EC-9BFC-47BE-A501-0D1272FBCF39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensDotNet.Core", "LensDotNet.Core\LensDotNet.Core.csproj", "{76D012EC-9BFC-47BE-A501-0D1272FBCF39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +18,6 @@ Global
 		{A409381B-F0DC-4ED9-B790-6DCB4BA51D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A409381B-F0DC-4ED9-B790-6DCB4BA51D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A409381B-F0DC-4ED9-B790-6DCB4BA51D55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6587D35-798F-4049-9C5F-FC7BF0DB580F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6587D35-798F-4049-9C5F-FC7BF0DB580F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6587D35-798F-4049-9C5F-FC7BF0DB580F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6587D35-798F-4049-9C5F-FC7BF0DB580F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE3D14DD-A104-4CC4-BD4D-B322E00BD2FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE3D14DD-A104-4CC4-BD4D-B322E00BD2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE3D14DD-A104-4CC4-BD4D-B322E00BD2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU

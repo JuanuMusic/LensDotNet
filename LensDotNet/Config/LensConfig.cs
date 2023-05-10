@@ -11,8 +11,9 @@ namespace LensDotNet.Config
         public const string PRODUCTION_GQL_ENDPOINT = "https://api.lens.dev";
         public const string DEVELOPMENT_GQL_ENDPOINT = "https://api-mumbai.lens.dev";
 
-        public LensConfig(string gqlEndpoint) => GqlEndpoint = gqlEndpoint;
-        
-        public string GqlEndpoint { get; set; }
+        public LensConfig(string gqlEndpoint) => GqlEndpoint = new Uri(gqlEndpoint);
+        public LensConfig(Uri gqlEndpoint) => GqlEndpoint = gqlEndpoint;
+
+        public Uri GqlEndpoint { get; set; }
     }
 }

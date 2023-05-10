@@ -1,13 +1,12 @@
-﻿using LensDotNet.Client.Authentication.Adapters;
+﻿using LensDotNet.Client;
+using LensDotNet.Client.Authentication.Adapters;
 using LensDotNet.Config;
-using LensDotNet.Models.Auth;
-using System.Net.Sockets;
 
 namespace LensDotNet.Authentication
 {
     public interface IAuthenticationClient
     {
-        public Task<Challenge?> GenerateChallenge(string address);
+        public Task<AuthChallengeResult?> GenerateChallenge(string address);
         public Task Authenticate(string address, string signature);
         public Task<bool> IsAuthenticated();
     }
@@ -18,7 +17,7 @@ namespace LensDotNet.Authentication
         private CredentialsAdapter _credentials;
 
         public AuthenticationClient(LensConfig config)
-            => _api = new LensAuthenticationApi(new Uri(config.GqlEndpoint));
+            => _api = new LensAuthenticationApi(config.GqlEndpoint);
 
         public async Task Authenticate(string address, string signature)
         {
@@ -26,7 +25,7 @@ namespace LensDotNet.Authentication
             _credentials = new CredentialsAdapter(credentials);
         }
 
-        public async Task<Challenge?> GenerateChallenge(string address)
+        public async Task<AuthChallengeResult?> GenerateChallenge(string address)
             => await _api.Challenge(address);
 
         public async Task<bool> IsAuthenticated()

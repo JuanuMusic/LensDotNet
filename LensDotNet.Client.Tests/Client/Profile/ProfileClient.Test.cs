@@ -1,5 +1,4 @@
-﻿using LensDotNet.Client.Models.Requests;
-using LensDotNet.Client.Profile;
+﻿using LensDotNet.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace LensDotNet.Tests.Client.Profile
         public async Task TestFetchShouldRunSuccessfullyNotAuthenticated()
         {
             var client = new ProfileClient(TestConfigs.DEV_CONFIG);
-             Assert.DoesNotThrowAsync(async () => await client.Fetch(new SingleProfileRequest { ProfileId = TestConfigs.EXISTING_PROFILE_ID }));
+            Assert.DoesNotThrowAsync(async () => await client.Fetch(new SingleProfileQueryRequest { ProfileId = TestConfigs.EXISTING_PROFILE_ID }));
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using LensDotNet.Models.Auth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -12,10 +11,10 @@ namespace LensDotNet.Client.Authentication.Adapters
     {
         public readonly static TimeSpan TOKEN_EXPIRATION_THRESHOLD = TimeSpan.FromSeconds(30);
         
-        private AuthenticationCredentials _credentials;
+        private AuthenticationResult _credentials;
         public string RefreshToken { get => _credentials == null ? String.Empty : _credentials.RefreshToken; }
         
-        public CredentialsAdapter(AuthenticationCredentials credentials)
+        public CredentialsAdapter(AuthenticationResult credentials)
             => _credentials = credentials;
 
         public bool ShouldRefresh()
