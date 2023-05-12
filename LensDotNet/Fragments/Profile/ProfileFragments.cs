@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LensDotNet.Client.Fragments.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,5 +39,32 @@ namespace LensDotNet.Client.Fragments.Profile
         //postsTotal(forSources: $sources)
         //mirrorsTotal(forSources: $sources)
         //publicationsTotal(forSources: $sources)
+    }
+
+    public record DoesFollowFragment
+    {
+        public EthereumAddress FollowerAddress { get; set; }
+
+        public ProfileId ProfileId { get; set; }
+
+        public bool Follows { get; set; }
+
+        public bool IsFinalisedOnChain { get; set; }
+    }
+
+    public record FollowingFragment
+    {
+        public ProfileFragment Profile { get; set; }
+    }
+
+    public record FollowerFragment
+    {
+        public WalletFragment Wallet { get ; set; }
+    }
+
+    public record FollowerNftOwnedTokenIdsFragment
+    {
+        public ContractAddress FollowerNftAddress { get; set; }
+        public string[] TokenIds { get; set; }
     }
 }

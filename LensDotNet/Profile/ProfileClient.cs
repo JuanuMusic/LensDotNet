@@ -5,18 +5,10 @@ using LensDotNet.Config;
 
 namespace LensDotNet.Client
 {
-    public class ProfileClient
+    public class ProfileClient : BaseClient
     {
-        private readonly AuthenticationClient? _authentication;
-        private readonly LensGQLClient _client;
-
-        public ProfileClient(LensConfig config, AuthenticationClient? authentication = null)
-        {
-            _authentication = authentication;
-            var httpClient = new HttpClient();
-            httpClient.BaseAddress = config.GqlEndpoint;
-            _client = new LensGQLClient(httpClient);
-        }
+        
+        public ProfileClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication){}
 
         public async Task<ProfileFragment> Fetch(SingleProfileQueryRequest profileRequest, string? observerId = null)
         {
@@ -80,6 +72,58 @@ namespace LensDotNet.Client
             var resp = await _client.Query(request,
                 static (i, o) => o.MutualFollowersProfiles(i.Input,
                     output => output.AsPaginatedResult<ProfileFragment>()));
+
+            return resp.Data;
+        }
+
+        public async Task<DoesFollowFragment[]> DoesFollow(DoesFollowRequest doesFollowRequest)
+        {
+            var request = new
+            {
+                Input = doesFollowRequest
+            };
+            var resp = await _client.Query(request,
+                static (i, o) => o.DoesFollow<DoesFollowFragment>(i.Input,
+                    output => output.AsDoesFollowFragment()));
+
+            return resp.Data;
+        }
+
+        public async Task<PaginatedResult<FollowingFragment>> AllFollowing(FollowingRequest followingRequest)
+        {
+            var request = new
+            {
+                Input = followingRequest
+            };
+            var resp = await _client.Query(request,
+                static (i, o) => o.Following<PaginatedResult<FollowingFragment>>(i.Input,
+                    output => output.AsPaginatedResult<FollowingFragment>()));
+
+            return resp.Data;
+        }
+
+        public async Task<PaginatedResult<FollowerFragment>> AllFollowers(FollowersRequest followersRequest)
+        {
+            var request = new
+            {
+                Input = followersRequest
+            };
+            var resp = await _client.Query(request,
+                static (i, o) => o.Followers<PaginatedResult<FollowerFragment>>(i.Input,
+                    output => output.AsPaginatedResult()));
+
+            return resp.Data;
+        }
+
+        public async Task<FollowerNftOwnedTokenIdsFragment> FollowerNftOwnedTokenIds(FollowerNftOwnedTokenIdsRequest followerNftOwnedTokenIdsRequest)
+        {
+            var request = new
+            {
+                Input = followerNftOwnedTokenIdsRequest
+            };
+            var resp = await _client.Query(request,
+                static (i, o) => o.FollowerNftOwnedTokenIds(i.Input,
+                    output => output.AsFragment()));
 
             return resp.Data;
         }
