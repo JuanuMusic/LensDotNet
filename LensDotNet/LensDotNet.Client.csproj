@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Generated\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 	<Target Name="GenerateQLClient" BeforeTargets="BeforeCompile">
