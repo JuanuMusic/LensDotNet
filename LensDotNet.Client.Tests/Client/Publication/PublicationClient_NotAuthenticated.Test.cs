@@ -8,6 +8,8 @@ namespace LensDotNet.Tests.Client.Publication
         {
             var client = new PublicationClient(TestConfigs.DEV_CONFIG);
             var resp = await client.Fetch(new PublicationQueryRequest { PublicationId = TestConfigs.EXISTING_PUBLICATION_ID });
+            Assert.That(resp, Is.Not.Null);
+            Assert.That(resp.Id == TestConfigs.EXISTING_PUBLICATION_ID);
         }
     }
 }

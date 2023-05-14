@@ -2,13 +2,14 @@
 using LensDotNet.Client.Fragments.Profile;
 using LensDotNet.Client.Fragments.Publication;
 using LensDotNet.Config;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LensDotNet.Client.Publication
+namespace LensDotNet.Client
 {
     public class PublicationClient : BaseClient
     {
@@ -18,10 +19,11 @@ namespace LensDotNet.Client.Publication
         {
             var request = new
             {
-                Input = publicationRequest,
-                ObserverId = observerId
+                Input = publicationRequest
             };
-            var resp = await _client.Query(request, static (i, o) => o.Publication<PostFragment>(i.Input, output => output.AsProfileFragment()));
+            var resp = await _client.Query(request, static (i, o) => o.Publication<PostFragment>(i.Input, 
+                output => (output as Post).AsFragment()
+            ));
             return resp.Data;
         }
     }

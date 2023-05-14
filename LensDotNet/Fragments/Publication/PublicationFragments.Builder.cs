@@ -70,7 +70,7 @@ namespace LensDotNet.Client.Fragments.Publication
         public static PostFragment AsFragment(this Post post)
             => new PostFragment
             {
-                CollectedBy = post.CollectedBy(w => w.AsFragment()),
+                //CollectedBy = post.CollectedBy(w => w.AsFragment()),
                 CollectNftAddress = post.CollectNftAddress,
                 CreatedAt = post.CreatedAt,
                 DataAvailabilityProofs = post.DataAvailabilityProofs,

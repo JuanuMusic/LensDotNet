@@ -8,8 +8,8 @@ namespace LensDotNet.Client.Fragments.Common
 {
     public record CommonPaginatedResultInfo
     {
-        public string? Prev { get; set; }
-        public string? Next { get; set; }
+        public Cursor? Prev { get; set; }
+        public Cursor? Next { get; set; }
     }
 
     public record PaginatedResult<T>

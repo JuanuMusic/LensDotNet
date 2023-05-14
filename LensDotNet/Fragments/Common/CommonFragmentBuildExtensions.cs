@@ -12,13 +12,11 @@ namespace LensDotNet.Client.Fragments.Common
     {
         [GraphQLFragment]
         public static CommonPaginatedResultInfo AsCommonPaginatedResultInfo(this PaginatedResultInfo resultInfo)
-        {
-            return new CommonPaginatedResultInfo
+            => new CommonPaginatedResultInfo
             {
                 Next = resultInfo.Next,
                 Prev = resultInfo.Prev
             };
-        }
 
         [GraphQLFragment]
         public static WalletFragment AsFragment(this Wallet wallet)

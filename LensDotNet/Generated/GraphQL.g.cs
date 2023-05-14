@@ -7516,7 +7516,7 @@ namespace LensDotNet.Client
         }
 
         public static implicit operator ReferenceModuleData(string value) => new ReferenceModuleData(value);
-        public static implicit operator string (ReferenceModuleData scalar) => scalar.Value;
+        public static implicit operator string (ReferenceModuleData scalar) => scalar == null ? null : scalar.Value;
     }
 
     public sealed record Cursor : ZeroQLScalar
