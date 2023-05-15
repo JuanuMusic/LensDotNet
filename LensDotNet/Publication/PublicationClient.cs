@@ -26,5 +26,14 @@ namespace LensDotNet.Client
             ));
             return resp.Data;
         }
+
+        public async Task Report(ReportPublicationRequest reportRequest)
+        {
+            var request = new
+            {
+                Input = reportRequest
+            };
+            await _client.Mutation(request, static (i, o) => o.ReportPublication(i.Input));
+        }
     }
 }
