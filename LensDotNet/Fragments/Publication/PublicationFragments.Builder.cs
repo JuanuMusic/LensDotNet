@@ -67,6 +67,35 @@ namespace LensDotNet.Client.Fragments.Publication
             };
 
         [GraphQLFragment]
+        public static PublicationFragment AsFragment(this Client.Publication p)
+             => new PublicationFragment
+             {
+                 Post = p.On<Post>().Select(pp => ((Post)pp).AsFragment()),
+                 Comment = p.On<Comment>().Select(pc => ((Comment)pc).AsFragment()),
+                 Mirror = p.On<Mirror>().Select(pm => ((Mirror)pm).AsFragment())
+             };
+
+        [GraphQLFragment]
+        public static CommentFragment AsFragment(this Comment comment)
+            => new CommentFragment
+            {
+                CollectedBy = comment.CollectedBy(w => w.AsFragment()),
+                CollectNftAddress = comment.CollectNftAddress,
+                CreatedAt = comment.CreatedAt,
+                DataAvailabilityProofs = comment.DataAvailabilityProofs,
+                HasCollectedByMe = comment.HasCollectedByMe(null),
+                Hidden = comment.Hidden,
+                Id = comment.Id,
+                IsDataAvailability = comment.IsDataAvailability,
+                IsGated = comment.IsGated,
+                Metadata = comment.Metadata(m => m.AsFragment()),
+                //Mirrors = comment.Mirrors(null),
+                Profile = comment.Profile(p => p.AsProfileFragment()),
+                Reaction = comment.Reaction(null),
+                Stats = comment.Stats(s => s.AsFragment())
+            };
+
+        [GraphQLFragment]
         public static PostFragment AsFragment(this Post post)
             => new PostFragment
             {
@@ -79,12 +108,20 @@ namespace LensDotNet.Client.Fragments.Publication
                 Id = post.Id,
                 IsDataAvailability = post.IsDataAvailability,
                 IsGated = post.IsGated,
-                Metadata = post.Metadata(m => m.AsFragment()),
-                Mirrors = post.Mirrors(null),
-                Profile = post.Profile(p => p.AsProfileFragment()),
-                Reaction = post.Reaction(null),
-                Stats = post.Stats(s => s.AsFragment())
+                //Metadata = post.Metadata(m => m.AsFragment()),
+                //Mirrors = post.Mirrors(null),
+                //Profile = post.Profile(p => p.AsProfileFragment()),
+                //Reaction = post.Reaction(null),
+                //Stats = post.Stats(s => s.AsFragment())
             };
 
+        [GraphQLFragment]
+        public static MirrorFragment AsFragment(this Mirror mirror)
+            => new MirrorFragment
+            {
+                Id = mirror.Id
+            };
+
+        
     }
 }

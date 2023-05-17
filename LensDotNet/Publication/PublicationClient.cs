@@ -15,15 +15,14 @@ namespace LensDotNet.Client
     {
         public PublicationClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication) {}
 
-        public async Task<PostFragment> Fetch(PublicationQueryRequest publicationRequest, string? observerId = null)
+        public async Task<PublicationFragment> Fetch(PublicationQueryRequest publicationRequest, string? observerId = null)
         {
             var request = new
             {
                 Input = publicationRequest
             };
-            var resp = await _client.Query(request, static (i, o) => o.Publication<PostFragment>(i.Input, 
-                output => (output as Post).AsFragment()
-            ));
+            var resp = await _client.Query(request, static (i, o) => o.Publication(i.Input,
+                output => output.AsFragment()));
             return resp.Data;
         }
 

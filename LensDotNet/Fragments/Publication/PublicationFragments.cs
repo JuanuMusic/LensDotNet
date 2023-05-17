@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 
 namespace LensDotNet.Client.Fragments.Publication
 {
+    public record PublicationFragment
+    {
+        public PostFragment? Post { get; set; }
+        public MirrorFragment Mirror { get; set; }
+        public CommentFragment? Comment { get; set; }
+    }
+
     public record SimplePublicationStatsFragment
     {
         public int TotalAmountOfMirrors { get; set; }
@@ -50,7 +57,7 @@ namespace LensDotNet.Client.Fragments.Publication
         public MetadataAttributeOutputFragment[] Attributes { get; set; } = new MetadataAttributeOutputFragment[0];
     }
 
-    public record PostFragment
+    public record BasePublicationFragment
     {
         public InternalPublicationId Id { get; set; }
         public ContractAddress CollectNftAddress { get; set; }
@@ -66,5 +73,18 @@ namespace LensDotNet.Client.Fragments.Publication
         public MetadataFragment Metadata { get; set; }
         public ProfileFragment Profile { get; set; }
         public WalletFragment CollectedBy { get; set; }
+        public object CollectModule { get; set; }
+        public object ReferenceModule { get; set; }
+        public bool CanComment { get; set; }
+        public bool CanMirror { get; set; }
+    }
+
+    public record PostFragment : BasePublicationFragment
+    {}
+
+    public record CommentFragment : BasePublicationFragment { }
+
+    public record MirrorFragment {
+        public InternalPublicationId Id { get; set; }
     }
 }
