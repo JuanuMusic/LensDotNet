@@ -14,6 +14,14 @@ namespace LensDotNet.Client.Fragments.Publication
     public static class PublicationFragmentsBuildExtensions
     {
         [GraphQLFragment]
+        public static PaginatedResult<PublicationFragment> AsPaginatedResult<T>(this PaginatedPublicationResult resultInfo)
+            => new PaginatedResult<PublicationFragment>
+            {
+                PageInfo = resultInfo.PageInfo(pi => pi.AsCommonPaginatedResultInfo()),
+                Items = resultInfo.Items(itm => itm.AsFragment())
+            };
+
+        [GraphQLFragment]
         public static SimplePublicationStatsFragment AsFragment(this PublicationStats stats)
             => new SimplePublicationStatsFragment
                 {
@@ -122,6 +130,21 @@ namespace LensDotNet.Client.Fragments.Publication
                 Id = mirror.Id
             };
 
-        
+        [GraphQLFragment]
+        public static PublicationForSaleFragment AsFragment(this PublicationForSale pubForSale)
+            => new PublicationForSaleFragment
+            {
+                Post = pubForSale.On<Post>().Select(p => p.AsFragment()),
+                Comment = pubForSale.On<Comment>().Select(c => c.AsFragment())
+            };
+
+        [GraphQLFragment]
+        public static PaginatedResult<PublicationForSaleFragment> AsPaginatedResult(this PaginatedProfilePublicationsForSaleResult paginatedResult)
+            => new PaginatedResult<PublicationForSaleFragment>
+            {
+                Items = paginatedResult.Items(i => i.AsFragment()),
+                PageInfo = paginatedResult.PageInfo(pi => pi.AsCommonPaginatedResultInfo())
+            };
+
     }
 }

@@ -24,5 +24,13 @@ namespace LensDotNet.Client.Fragments.Common
                 Address = wallet.Address, 
                 DefaultProfile = wallet.DefaultProfile(p => p.AsProfileFragment())
             };
+
+        [GraphQLFragment]
+        public static PaginatedResult<WalletFragment> AsPaginatedResult(this PaginatedWhoCollectedResult resultInfo)
+            => new PaginatedResult<WalletFragment>
+            {
+                PageInfo = resultInfo.PageInfo(pi => pi.AsCommonPaginatedResultInfo()),
+                Items = resultInfo.Items(itm => itm.AsFragment())
+            };
     }
 }

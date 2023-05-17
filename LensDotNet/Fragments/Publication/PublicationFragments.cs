@@ -87,4 +87,10 @@ namespace LensDotNet.Client.Fragments.Publication
     public record MirrorFragment {
         public InternalPublicationId Id { get; set; }
     }
+
+    public record PublicationForSaleFragment
+    {
+        public CommentFragment Comment { get; set; }
+        public PostFragment Post { get; set; }
+    }
 }
