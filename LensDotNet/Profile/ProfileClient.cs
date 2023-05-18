@@ -20,7 +20,7 @@ namespace LensDotNet.Client
                     ProfileId = profileRequest.ProfileId
                 }
             };
-            var resp = await _client.Query(request, static (i, o) => o.Profile<ProfileFragment>(i.Input, output => output.AsProfileFragment() ));
+            var resp = await this.Query(request, static (i, o) => o.Profile<ProfileFragment>(i.Input, output => output.AsProfileFragment() ));
             return resp.Data;
         }
 
@@ -35,7 +35,7 @@ namespace LensDotNet.Client
                 },
                 Sources = sources
             };
-            var resp = await _client.Query(request, static (i, o) => o.Profile<ProfileStatsFragment>(i.Input, output => output.Stats<ProfileStatsFragment>(stats => stats.AsProfileStatsFragment(i.Sources))));
+            var resp = await this.Query(request, static (i, o) => o.Profile<ProfileStatsFragment>(i.Input, output => output.Stats<ProfileStatsFragment>(stats => stats.AsProfileStatsFragment(i.Sources))));
             return resp.Data;
         }
 
@@ -45,7 +45,7 @@ namespace LensDotNet.Client
             {
                 Input = profileRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.Profiles<PaginatedResult<ProfileFragment>>(i.Input,
                     output => output.AsPaginatedResult<ProfileFragment>()));
 
@@ -59,7 +59,7 @@ namespace LensDotNet.Client
                 Input = options
             };
 
-            var resp = await _client.Query(req, static (i, output) => output.RecommendedProfiles(i.Input, p => p.AsProfileFragment()));
+            var resp = await this.Query(req, static (i, output) => output.RecommendedProfiles(i.Input, p => p.AsProfileFragment()));
             return resp.Data;
         }
 
@@ -69,7 +69,7 @@ namespace LensDotNet.Client
             {
                 Input = mutualFollowersRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.MutualFollowersProfiles(i.Input,
                     output => output.AsPaginatedResult<ProfileFragment>()));
 
@@ -82,7 +82,7 @@ namespace LensDotNet.Client
             {
                 Input = doesFollowRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.DoesFollow<DoesFollowFragment>(i.Input,
                     output => output.AsDoesFollowFragment()));
 
@@ -95,7 +95,7 @@ namespace LensDotNet.Client
             {
                 Input = followingRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.Following<PaginatedResult<FollowingFragment>>(i.Input,
                     output => output.AsPaginatedResult<FollowingFragment>()));
 
@@ -108,7 +108,7 @@ namespace LensDotNet.Client
             {
                 Input = followersRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.Followers<PaginatedResult<FollowerFragment>>(i.Input,
                     output => output.AsPaginatedResult()));
 
@@ -121,7 +121,7 @@ namespace LensDotNet.Client
             {
                 Input = followerNftOwnedTokenIdsRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.FollowerNftOwnedTokenIds(i.Input,
                     output => output.AsFragment()));
 

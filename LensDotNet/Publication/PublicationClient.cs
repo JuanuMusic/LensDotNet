@@ -23,7 +23,7 @@ namespace LensDotNet.Client
             {
                 Input = forSaleRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                static (i, o) => o.ProfilePublicationsForSale(i.Input,
                    output => output.AsPaginatedResult()));
 
@@ -36,7 +36,7 @@ namespace LensDotNet.Client
             {
                 Input = whoCollectedPublicationRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.WhoCollectedPublication<PaginatedResult<WalletFragment>>(i.Input,
                     output => output.AsPaginatedResult()));
 
@@ -49,7 +49,7 @@ namespace LensDotNet.Client
             {
                 Input = publicationRequest
             };
-            var resp = await _client.Query(request, static (i, o) => o.Publication(i.Input,
+            var resp = await this.Query(request, static (i, o) => o.Publication(i.Input,
                 output => output.AsFragment()));
             return resp.Data;
         }
@@ -60,7 +60,7 @@ namespace LensDotNet.Client
             {
                 Input = publicationsQueryRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.Publications<PaginatedResult<PublicationFragment>>(i.Input,
                     output => output.AsPaginatedResult<PublicationFragment>()));
 
@@ -73,7 +73,7 @@ namespace LensDotNet.Client
             {
                 Input = getPublicationMetadataStatusRequest
             };
-            var resp = await _client.Query(request,
+            var resp = await this.Query(request,
                 static (i, o) => o.PublicationMetadataStatus(i.Input,
                     output => new PublicationMetadataStatus { Status = output.Status, Reason = output.Reason }));
 
@@ -86,7 +86,7 @@ namespace LensDotNet.Client
             {
                 Input = reportRequest
             };
-            await _client.Mutation(request, static (i, o) => o.ReportPublication(i.Input));
+            await this.Mutation(request, static (i, o) => o.ReportPublication(i.Input));
         }
 
         public async Task<PublicationValidateMetadataResult> ValidateMetadata(PublicationMetadataV2Input validateRequest)
@@ -95,7 +95,7 @@ namespace LensDotNet.Client
             {
                 Input = new ValidatePublicationMetadataRequest { Metadatav2 = validateRequest }
             };
-            var resp = await _client.Query(request, static (i, o) => o.ValidatePublicationMetadata(i.Input,
+            var resp = await this.Query(request, static (i, o) => o.ValidatePublicationMetadata(i.Input,
                 o => new PublicationValidateMetadataResult { Reason = o.Reason, Valid = o.Valid }));
 
             return resp.Data;

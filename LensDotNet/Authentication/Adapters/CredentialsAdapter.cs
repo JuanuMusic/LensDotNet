@@ -12,8 +12,9 @@ namespace LensDotNet.Client.Authentication.Adapters
         public readonly static TimeSpan TOKEN_EXPIRATION_THRESHOLD = TimeSpan.FromSeconds(30);
         
         private AuthenticationResult _credentials;
+        public string AccessToken { get => _credentials == null ? String.Empty : _credentials.AccessToken; }
         public string RefreshToken { get => _credentials == null ? String.Empty : _credentials.RefreshToken; }
-        
+
         public CredentialsAdapter(AuthenticationResult credentials)
             => _credentials = credentials;
 
