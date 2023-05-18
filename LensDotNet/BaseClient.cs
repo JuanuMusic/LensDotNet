@@ -3,22 +3,39 @@ using LensDotNet.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LensDotNet.Client
 {
-    public abstract class BaseClient
+    public abstract class BaseClient : LensGQLClient
     {
-        internal readonly AuthenticationClient? _authentication;
-        internal readonly LensGQLClient _client;
+        internal AuthenticationClient? _authentication;
 
-        public BaseClient(LensConfig config, AuthenticationClient? authentication = null)
+        public BaseClient(LensConfig config, AuthenticationClient? authentication = null) :
+            base(new HttpClient())
         {
-            _authentication = authentication;
-            var httpClient = new HttpClient();
-            httpClient.BaseAddress = config.GqlEndpoint;
-            _client = new LensGQLClient(httpClient);
+            base.HttpClient.BaseAddress = config.GqlEndpoint;
+            RefreshAuthentication(authentication).Wait();
+        }
+
+        public async Task RefreshAuthentication(AuthenticationClient? newClient = null)
+        {
+            if(newClient != null)
+            {
+                _authentication = newClient;
+            }
+
+            if (_authentication != null)
+                await RefreshAuthHeaders();
+        }
+
+        private async Task RefreshAuthHeaders()
+        {
+            if (_authentication != null && await _authentication.IsAuthenticated())
+                base.HttpClient.DefaultRequestHeaders.Authorization = await _authentication.GetRequestHeader();
         }
     }
 }

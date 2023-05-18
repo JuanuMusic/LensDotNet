@@ -41,15 +41,6 @@ namespace LensDotNet.Client.Authentication.Adapters
             var request = new { Input = new RefreshRequest { RefreshToken = refreshToken } };
             var resp = await _client.Mutation(request, static (i, o) => o.Refresh(i.Input, o => new AuthenticationResult { AccessToken = o.AccessToken, RefreshToken = o.RefreshToken}));
             return resp.Data;
-            //var request = new GraphQLRequest(AuthQueries.Refresh, new { refreshToken = refreshToken });
-            //var result = await _client.SendQueryAsync<ApiResponse<AuthenticationCredentials>>(request);
-
-            //if (result == null) return null;
-            //if (result.Errors != null && result.Errors.Length > 0)
-            //{
-            //    throw result.Errors.ToException();
-            //}
-            //return result.Data.Result;
         }
 
         public async Task<bool?> Verify(string accessToken)
