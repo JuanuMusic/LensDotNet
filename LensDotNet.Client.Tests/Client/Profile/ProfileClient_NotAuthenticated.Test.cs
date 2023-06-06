@@ -87,5 +87,15 @@ namespace LensDotNet.Tests.Client.Profile
                 ProfileId = TestConfigs.EXISTING_PROFILE_ID
             }));
         }
+
+        [Test]
+        public async Task Test_ExploreProfiles_ShouldFetchProfilesSuccesfully()
+        {
+            var client = new ProfileClient(TestConfigs.DEV_CONFIG);
+            var profiles = await client.ExploreProfiles();
+            Assert.IsNotNull(profiles);
+            Assert.IsNotNull(profiles.Items);
+            Assert.Greater(profiles.Items.Length, 0);
+        }
     }
 }

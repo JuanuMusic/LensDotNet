@@ -1,0 +1,3 @@
+query verify($accessToken: Jwt!) {
+  result: verify(request: { accessToken: $accessToken })
+}

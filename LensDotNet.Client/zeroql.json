@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/byme8/ZeroQL/main/schema.verified.json",
+  "graphql": "./schema.graphql",
+  "namespace": "LensDotNet.Client",
+  "clientName": "LensDotNetGraphQLClient",
+  "output": "./Generated/GraphQL.g.cs",
+  "netstandardCompatibility": true
+}

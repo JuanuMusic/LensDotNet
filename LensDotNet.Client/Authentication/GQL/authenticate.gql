@@ -1,0 +1,12 @@
+﻿mutation Authenticate(
+    $address: EthereumAddress!
+    $signature: Signature!
+  ) {
+    result: authenticate(request: {
+      address: $address,
+      signature: $signature
+    }) {
+      accessToken
+      refreshToken
+    }
+  }

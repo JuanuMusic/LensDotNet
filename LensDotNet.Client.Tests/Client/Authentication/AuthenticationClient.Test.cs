@@ -1,14 +1,6 @@
 ﻿using LensDotNet.Authentication;
-using LensDotNet.Client.Authentication.Adapters;
-using LensDotNet.Config;
 using LensDotNet.Tests.Utils;
-using Nethereum.HdWallet;
 using Nethereum.Web3.Accounts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LensDotNet.Tests.Client.Authentication
 {
