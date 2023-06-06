@@ -360,6 +360,7 @@ Examples/LensDotNet.Examples.Unity/[Bb]uild/
 Examples/LensDotNet.Examples.Unity/[Bb]uilds/
 Examples/LensDotNet.Examples.Unity/[Ll]ogs/
 Examples/LensDotNet.Examples.Unity/[Mm]emoryCaptures/
+Examples/LensDotNet.Examples.Unity/[Tt]emp/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 Examples/LensDotNet.Examples.Unity/[Aa]ssets/AssetStoreTools*
