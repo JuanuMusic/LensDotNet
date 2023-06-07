@@ -69,7 +69,7 @@ Here's the tentative roadmap for upcoming features. Feel free to suggest new fea
   - [x] Unit tests
 - [x] Unity support
 - [ ] Advanced API methods
-- [ ] Xamarin support
+- [ ] ~~Xamarin~~ MAUI support
 - [ ] Comprehensive documentation and examples
 
 ## Acknowledgements
