@@ -1,11 +1,12 @@
 # LensDotNet
 
-LensDotNet is a .NET Standard library that provides an easy and efficient way to interact with the Lens API. This library enables you to seamlessly utilize Lens API in various platforms, such as desktop applications, mobile apps using Xamarin, and games using Unity.
+LensDotNet is a .NET library that provides an easy and efficient way to interact with the Lens API. This library enables you to seamlessly utilize Lens API in various platforms, such as desktop applications, mobile apps using Xamarin, and games using Unity.
 
 ## Table of Contents
 
 - [LensDotNet](#lensdotnet)
   - [Table of Contents](#table-of-contents)
+  - [Supported Frameworks](#supported-frameworks)
   - [Installation](#installation)
     - [Package Manager Console](#package-manager-console)
     - [NuGet Package Manager in Visual Studio](#nuget-package-manager-in-visual-studio)
@@ -14,6 +15,11 @@ LensDotNet is a .NET Standard library that provides an easy and efficient way to
   - [Roadmap](#roadmap)
   - [Acknowledgements](#acknowledgements)
   - [License](#license)
+
+## Supported Frameworks
+- .net Standard 2.1
+- .net 6.0
+- .net 7.0
 
 ## Installation
 
@@ -69,7 +75,7 @@ Here's the tentative roadmap for upcoming features. Feel free to suggest new fea
   - [x] Unit tests
 - [x] Unity support
 - [ ] Advanced API methods
-- [ ] ~~Xamarin~~ MAUI support
+- [x] ~~Xamarin~~ MAUI support
 - [ ] Comprehensive documentation and examples
 
 ## Acknowledgements

@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unity", "Unity", "{A975CB74
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensDotNet.Client", "LensDotNet.Client\LensDotNet.Client.csproj", "{F91D2428-6C9E-46FB-A2DF-0F1BD49EF857}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensDotNet.Examples.MAUI", "LensDotNet.Examples.MAUI\LensDotNet.Examples.MAUI.csproj", "{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,12 @@ Global
 		{F91D2428-6C9E-46FB-A2DF-0F1BD49EF857}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F91D2428-6C9E-46FB-A2DF-0F1BD49EF857}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F91D2428-6C9E-46FB-A2DF-0F1BD49EF857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +52,7 @@ Global
 		{398915D2-B647-4B64-BBF5-477884C8E4A0} = {B75FDDDE-B4FD-48FA-B2DC-87039C9942AB}
 		{1AC57473-FAA5-0BD5-081E-D75E0674CB3F} = {A975CB74-A837-4D9D-BBA5-A89005E49A0C}
 		{A975CB74-A837-4D9D-BBA5-A89005E49A0C} = {B75FDDDE-B4FD-48FA-B2DC-87039C9942AB}
+		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C} = {B75FDDDE-B4FD-48FA-B2DC-87039C9942AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83DD8FFC-82B4-435F-AD39-9A93589C732B}
