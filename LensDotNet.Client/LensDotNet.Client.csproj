@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net6.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+	  <LangVersion>latestmajor</LangVersion>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Title>LensDotNet</Title>
+	  <Authors>juanu</Authors>
+	  <Company>$(Company)</Company>
+	  <Description>A .NET Standard implementation of the Lens Protocol SDK with graphql support.</Description>
+	  <Copyright>MIT</Copyright>
+	  <RepositoryUrl>https://github.com/JuanuMusic/LensDotNet</RepositoryUrl>
+	  <PackageTags>lensprotocol;lens protocol;graphql;linq;lens</PackageTags>
+	  <NeutralLanguage>en</NeutralLanguage>
+	  <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Authentication\GQL\AuthQueries.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
+    <PackageReference Include="ZeroQL" Version="4.1.0" />
+  </ItemGroup>
+
+	<Target Name="GenerateQLClient" BeforeTargets="BeforeCompile">
+	    <Exec Command="dotnet zeroql generate --schema .\schema.graphql --namespace LensDotNet.Client --client-name LensGraphQLClient --output Generated/GraphQL.g.cs" />
+    </Target>
+
+</Project>
