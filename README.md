@@ -74,13 +74,18 @@ Here's the tentative roadmap for upcoming features. Feel free to suggest new fea
 - [x] Basic API interaction
   - [x] Unit tests
 - [x] Unity support
+  - [ ] Improved Unity examples
 - [ ] Advanced API methods
 - [x] ~~Xamarin~~ MAUI support
-- [ ] Comprehensive documentation and examples
+  - [ ] Improved MAUI examples
+- [.] Clients
+  - [x] Profile Client
+  - [x] Authentication Client
+  - [ ] Publication Client
+    - [ ] Create Publication
+- [ ] Comprehensive documentation
 
 ## Acknowledgements
-
-A special thanks to the following individuals and organizations for their contributions, support, and encouragement in the development of LensDotNet:
 
 - [Stanislav Silin](https://github.com/byme8) for his amazing work on [ZeroQL](https://github.com/byme8/ZeroQL), the underlying graphQL client used. Also for pushing the .netstandard support so fast as well as figuring out the use in Unity. 
 - [Grabriel Weyer](https://github.com/gabrielweyer) from whom I copied and pasted his [JWT decoder implementation](https://github.com/gabrielweyer/dotnet-decode-jwt/blob/f304f17b910e6233d1053a98bda3d8ada5e10d3e/src/dotnet-decode-jwt/JwtClaimsDecoder.cs), which allowed me to reduce the number of dependencies

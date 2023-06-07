@@ -13,7 +13,7 @@
 	  <RepositoryUrl>https://github.com/JuanuMusic/LensDotNet</RepositoryUrl>
 	  <PackageTags>lensprotocol;lens protocol;graphql;linq;lens</PackageTags>
 	  <NeutralLanguage>en</NeutralLanguage>
-	  <Version>1.0.1</Version>
+	  <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
