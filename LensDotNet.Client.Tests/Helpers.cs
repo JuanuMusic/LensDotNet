@@ -1,21 +1,24 @@
 ﻿using LensDotNet.Authentication;
 using LensDotNet.Client;
+using LensDotNet.Client.Fragments.Gasless;
 using LensDotNet.Tests.Utils;
+using Nethereum.ABI.EIP712;
 using Nethereum.Contracts;
 using Nethereum.Web3.Accounts;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LensDotNet.Tests
 {
-    public class Helpers
+    public static class Helpers
     {
 
-        public static async Task<AuthenticationClient> GetAuthenticatedClient(Account account)
+        public static async Task<AuthenticationClient> GetAuthenticationClient(Account account)
         {
             var authenticationClient = new AuthenticationClient(TestConfigs.DEV_CONFIG);
             var challenge = await authenticationClient.GenerateChallenge(account.Address);

@@ -93,4 +93,10 @@ namespace LensDotNet.Client.Fragments.Publication
         public CommentFragment Comment { get; set; }
         public PostFragment Post { get; set; }
     }
+
+    public record RelayResultFragment
+    {
+        public RelayerResult? Result { get; set; }
+        public RelayError? Error { get; set; }
+    }
 }

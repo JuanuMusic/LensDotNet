@@ -1,6 +1,7 @@
 ﻿using LensDotNet.Client;
 using LensDotNet.Client.Authentication.Adapters;
 using LensDotNet.Config;
+using System;
 using System.Threading.Tasks;
 
 namespace LensDotNet.Authentication
@@ -14,8 +15,10 @@ namespace LensDotNet.Authentication
 
     public class AuthenticationClient : IAuthenticationClient
     {
+        public event EventHandler OnAuthChanged;
         private readonly ILensAuthenticationApi _api;
         private CredentialsAdapter _credentials;
+        public string AccessToken { get => _credentials != null ? _credentials.AccessToken : string.Empty;  }
 
         public AuthenticationClient(LensConfig config)
             => _api = new LensAuthenticationApi(config.GqlEndpoint);
@@ -24,6 +27,7 @@ namespace LensDotNet.Authentication
         {
             var credentials = await _api.Authenticate(address, signature);
             _credentials = new CredentialsAdapter(credentials);
+            if (OnAuthChanged != null) OnAuthChanged.Invoke(this, new EventArgs());
         }
 
         public async Task<AuthChallengeResult?> GenerateChallenge(string address)
@@ -44,6 +48,7 @@ namespace LensDotNet.Authentication
                     return false;
                 
                 _credentials = new CredentialsAdapter(newCredentials);
+                if (OnAuthChanged != null) OnAuthChanged.Invoke(this, new EventArgs());
                 return true;
             }
 

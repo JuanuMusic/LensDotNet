@@ -1,6 +1,5 @@
 ﻿/// https://github.com/gabrielweyer/dotnet-decode-jwt/blob/f304f17b910e6233d1053a98bda3d8ada5e10d3e/src/dotnet-decode-jwt/JwtClaimsDecoder.cs
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +14,7 @@ namespace LendsDotnet.Client
             var base64UrlClaimsSet = GetBase64UrlClaimsSet(jwt);
             var claimsSet = DecodeBase64Url(base64UrlClaimsSet);
 
-            return JsonConvert.DeserializeObject<T>(claimsSet);
+            return JsonSerializer.Deserialize<T>(claimsSet);
         }
 
         private static string GetBase64UrlClaimsSet(string jwt)

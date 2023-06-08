@@ -140,5 +140,20 @@ namespace LensDotNet.Client.Fragments.Publication
                 PageInfo = paginatedResult.PageInfo(pi => pi.AsCommonPaginatedResultInfo())
             };
 
+        [GraphQLFragment]
+        public static PaginatedResult<PublicationFragment> AsPaginatedResult<T>(this ExplorePublicationResult resultInfo)
+            => new PaginatedResult<PublicationFragment>
+            {
+                PageInfo = resultInfo.PageInfo(pi => pi.AsCommonPaginatedResultInfo()),
+                Items = resultInfo.Items(itm => itm.AsFragment())
+            };
+
+        [GraphQLFragment]
+        public static RelayResultFragment AsFragment(this RelayResult relayResult)
+            => new RelayResultFragment
+            {
+                Result = relayResult.On<RelayerResult>().Select(rr => new RelayerResult { TxHash = rr.TxHash, TxId = rr.TxId }),
+                Error = relayResult.On<RelayError>().Select(re => new RelayError { Reason = re.Reason })
+            };
     }
 }

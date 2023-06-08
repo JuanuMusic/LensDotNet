@@ -14,7 +14,7 @@ namespace LensDotNet.Tests.Client.Authentication.Adapters
         public void SetUp()
         {
             _api = new LensAuthenticationApi(new Uri(LensConfig.DEVELOPMENT_GQL_ENDPOINT));
-            _account = new Account(Web3Helper.TEST_PK);
+            _account = new Account(TestConfigs.TEST_PK);
         }
 
         [Test]

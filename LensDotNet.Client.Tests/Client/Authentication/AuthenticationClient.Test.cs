@@ -6,7 +6,7 @@ namespace LensDotNet.Tests.Client.Authentication
 {
     public class AuthenticationTest
     {
-        private readonly static Account _account = new Account(Web3Helper.TEST_PK);
+        private readonly static Account _account = new Account(TestConfigs.TEST_PK);
 
         [Test]
         public async Task ChallengeShouldReturnChallengeForAddress()

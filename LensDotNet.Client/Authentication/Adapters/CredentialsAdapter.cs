@@ -1,19 +1,18 @@
 ﻿using LendsDotnet.Client;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace LensDotNet.Client.Authentication.Adapters
 {
     public class CredentialsAdapter
     {
+
         public readonly static TimeSpan TOKEN_EXPIRATION_THRESHOLD = TimeSpan.FromSeconds(30);
         
         private AuthenticationResult _credentials;
         public string RefreshToken { get => _credentials == null ? String.Empty : _credentials.RefreshToken; }
-        
+        public string AccessToken { get => _credentials == null ? String.Empty : _credentials.AccessToken; }
         public CredentialsAdapter(AuthenticationResult credentials)
             => _credentials = credentials;
 
@@ -38,7 +37,7 @@ namespace LensDotNet.Client.Authentication.Adapters
     public static class StringExtensions
     {
         public static T JSONDeserialize<T>(this string jsonString)
-            => Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonString);
+            => JsonSerializer.Deserialize<T>(jsonString);
 
         public static DateTime GetTokenExpTime(this Jwt accessToken)
         {
@@ -49,18 +48,17 @@ namespace LensDotNet.Client.Authentication.Adapters
 
     public class LensJWT
     {
-        [JsonProperty("iat")]
-        [Newtonsoft.Json.JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonPropertyName("iat")]   
         public DateTime IssuedAt { get; set; }
 
-        [JsonProperty("exp")]
-        [Newtonsoft.Json.JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonPropertyName("exp")]
+        //[Newtonsoft.Json.JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime ExpiresAt { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [JsonProperty("role")]
+        [JsonPropertyName("role")]
         public string Role { get; set; }
     }
 

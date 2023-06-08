@@ -1,10 +1,5 @@
 ﻿using LensDotNet.Client;
 using LensDotNet.Config;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LensDotNet.Examples.CLI
 {
@@ -13,7 +8,7 @@ namespace LensDotNet.Examples.CLI
         internal static async Task Run()
         {
             var config = new LensConfig(LensConfig.DEVELOPMENT_GQL_ENDPOINT);
-            var client = new ProfileClient(config);
+            var client = new ExploreClient(config);
             var profiles = await client.ExploreProfiles();
 
             Console.WriteLine($"Found {profiles.Items.Length} profiles");

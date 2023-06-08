@@ -44,7 +44,8 @@ namespace LensDotNet.Client.Fragments.Profile
                 Interests = profile.Interests,
                 IsDefault = profile.IsDefault,
                 Name = profile.Name,
-                OwnedBy = profile.OwnedBy
+                OwnedBy = profile.OwnedBy,
+                Dispatcher = profile.Dispatcher(d => new Dispatcher {  Address = d.Address, CanUseRelay = d.CanUseRelay, Sponsor = d.Sponsor })
             };
 
         [GraphQLFragment]

@@ -14,7 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unity", "Unity", "{A975CB74
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensDotNet.Client", "LensDotNet.Client\LensDotNet.Client.csproj", "{F91D2428-6C9E-46FB-A2DF-0F1BD49EF857}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensDotNet.Examples.MAUI", "LensDotNet.Examples.MAUI\LensDotNet.Examples.MAUI.csproj", "{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensDotNet.Examples.MAUI", "LensDotNet.Examples.MAUI\LensDotNet.Examples.MAUI.csproj", "{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZeroQL.Runtime", "..\ZeroQL\src\ZeroQL.Runtime\ZeroQL.Runtime.csproj", "{06A4A96C-4EAD-42E9-99BA-005987512A23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3AF3CAF-D164-49B5-80EE-2D8E4179081C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{06A4A96C-4EAD-42E9-99BA-005987512A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06A4A96C-4EAD-42E9-99BA-005987512A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06A4A96C-4EAD-42E9-99BA-005987512A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06A4A96C-4EAD-42E9-99BA-005987512A23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Generated\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 
@@ -39,9 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Text.Json" Version="7.0.2" />
-    <PackageReference Include="ZeroQL" Version="4.1.0" />
+    <PackageReference Include="ZeroQL.Runtime" Version="4.1.0" />
   </ItemGroup>
 
 	<Target Name="GenerateQLClient" BeforeTargets="BeforeCompile">
