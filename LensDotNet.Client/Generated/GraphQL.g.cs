@@ -10,6 +10,7 @@ namespace LensDotNet.Client
     using System.Text.Json;
     using ZeroQL;
     using ZeroQL.Json;
+    using LensDotNet.Client.Json.Converters;
 
     public class LensGraphQLClient : global::ZeroQL.GraphQLClient<Query, Mutation>
     {
@@ -4070,6 +4071,7 @@ namespace LensDotNet.Client
         public string Name { get; set; }
 
         [ZeroQL.GraphQLFieldSelector("chainId")]
+        [JsonConverter(typeof(LongToChainIdJsonConverter))]
         public global::LensDotNet.Client.ChainId ChainId { get; set; }
 
         [ZeroQL.GraphQLFieldSelector("version")]
@@ -4083,9 +4085,11 @@ namespace LensDotNet.Client
     public class CreateSetDispatcherEIP712TypedDataValue
     {
         [ZeroQL.GraphQLFieldSelector("nonce")]
+        [JsonConverter(typeof(LongToNonceJsonConverter))]
         public global::LensDotNet.Client.Nonce Nonce { get; set; }
 
         [ZeroQL.GraphQLFieldSelector("deadline")]
+        [JsonConverter(typeof(LongToUnixTimestampConverter))]
         public global::LensDotNet.Client.UnixTimestamp Deadline { get; set; }
 
         [ZeroQL.GraphQLFieldSelector("profileId")]

@@ -9,17 +9,90 @@ using ZeroQL;
 
 namespace LensDotNet.Client.Json.Converters
 {
-    public class LongToChainIdJsonConverter : LongToZeroQLScalarJsonConverter<ChainId>
+    public class LongToChainIdJsonConverter : JsonConverter<ChainId>
     {
         public LongToChainIdJsonConverter() { }
+        public override ChainId Read(ref Utf8JsonReader reader, Type type, JsonSerializerOptions options)
+        {
+            var span = reader.HasValueSequence ? reader.ValueSequence.ToArray() : reader.ValueSpan;
+
+            if (Utf8Parser.TryParse(span, out long number, out var bytesConsumed) && span.Length == bytesConsumed)
+            {
+               
+                var retVal = new ChainId { Value = number.ToString() };
+                return retVal;
+            }
+
+            var data = reader.GetString();
+
+            throw new InvalidOperationException($"'{data}' is not a correct expected value!")
+            {
+                Source = nameof(LongToChainIdJsonConverter)
+            };
+        }
+
+        public override void Write(Utf8JsonWriter writer, ChainId value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value.Value);
+        }
     }
 
     public class LongToNonceJsonConverter : LongToZeroQLScalarJsonConverter<Nonce>
     {
-        public LongToNonceJsonConverter() { }
+        public override Nonce Read(ref Utf8JsonReader reader, Type type, JsonSerializerOptions options)
+        {
+            var span = reader.HasValueSequence ? reader.ValueSequence.ToArray() : reader.ValueSpan;
+
+            if (Utf8Parser.TryParse(span, out long number, out var bytesConsumed) && span.Length == bytesConsumed)
+            {
+
+                var retVal = new Nonce { Value = number.ToString() };
+                return retVal;
+            }
+
+            var data = reader.GetString();
+
+            throw new InvalidOperationException($"'{data}' is not a correct expected value!")
+            {
+                Source = nameof(LongToNonceJsonConverter)
+            };
+        }
+
+        public override void Write(Utf8JsonWriter writer, Nonce value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value.Value);
+        }
     }
 
-    public class LongToZeroQLScalarJsonConverter<TZeroQLScalar> : JsonConverter<TZeroQLScalar> where TZeroQLScalar : ZeroQLScalar
+    internal class LongToUnixTimestampConverter : LongToZeroQLScalarJsonConverter<UnixTimestamp>
+    {
+        public LongToUnixTimestampConverter() { }
+
+        public override UnixTimestamp Read(ref Utf8JsonReader reader, Type type, JsonSerializerOptions options)
+        {
+            var span = reader.HasValueSequence ? reader.ValueSequence.ToArray() : reader.ValueSpan;
+
+            if (Utf8Parser.TryParse(span, out long number, out var bytesConsumed) && span.Length == bytesConsumed)
+            {
+                var retVal = new UnixTimestamp { Value = number.ToString() };
+                return retVal;
+            }
+
+            var data = reader.GetString();
+
+            throw new InvalidOperationException($"'{data}' is not a correct expected value!")
+            {
+                Source = nameof(LongToUnixTimestampConverter)
+            };
+        }
+
+        public override void Write(Utf8JsonWriter writer, UnixTimestamp value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value.Value);
+        }
+    }
+
+        public class LongToZeroQLScalarJsonConverter<TZeroQLScalar> : JsonConverter<TZeroQLScalar> where TZeroQLScalar : ZeroQLScalar
     {
         //public LongToZeroQLScalarJsonConverter<TZeroQLScalar>() {}
 
@@ -32,7 +105,24 @@ namespace LensDotNet.Client.Json.Converters
             var span = reader.HasValueSequence ? reader.ValueSequence.ToArray() : reader.ValueSpan;
 
             if (Utf8Parser.TryParse(span, out long number, out var bytesConsumed) && span.Length == bytesConsumed)
-                return new ZeroQLScalar { Value = number.ToString() } as TZeroQLScalar;
+            {
+                switch(type.Name)
+                {
+                    case "ChainId":
+                        return new ChainId { Value = number.ToString() } as TZeroQLScalar;
+                    case "Nonce":
+                        return new Nonce { Value = number.ToString() } as TZeroQLScalar;
+                    case "UnixTimestamp":
+                        return new UnixTimestamp { Value = number.ToString() } as TZeroQLScalar;
+                    default:
+                        throw new InvalidOperationException($"'{type.Name}' is not a correct expected value!")
+                        {
+                            Source = "LongToZeroQLScalarJsonConverter"
+                        };
+                }   
+                var retVal = new ZeroQLScalar { Value = number.ToString() } as TZeroQLScalar;
+                return retVal;
+            }
 
             var data = reader.GetString();
 

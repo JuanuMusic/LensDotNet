@@ -40,7 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ZeroQL.Runtime" Version="4.1.0" />
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
+    <PackageReference Include="ZeroQL" Version="4.1.0" />
   </ItemGroup>
 
 	<Target Name="GenerateQLClient" BeforeTargets="BeforeCompile">

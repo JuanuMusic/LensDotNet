@@ -1,4 +1,5 @@
 ﻿using LendsDotnet.Client;
+using LensDotNet.Client.Json.Converters;
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -48,11 +49,12 @@ namespace LensDotNet.Client.Authentication.Adapters
 
     public class LensJWT
     {
-        [JsonPropertyName("iat")]   
+        [JsonPropertyName("iat")]
+        [JsonConverter(typeof(UnixTimestampToDateTimeConverter))]
         public DateTime IssuedAt { get; set; }
 
         [JsonPropertyName("exp")]
-        //[Newtonsoft.Json.JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonConverter(typeof(UnixTimestampToDateTimeConverter))]
         public DateTime ExpiresAt { get; set; }
 
         [JsonPropertyName("id")]

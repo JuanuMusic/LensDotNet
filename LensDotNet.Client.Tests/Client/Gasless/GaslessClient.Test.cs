@@ -33,6 +33,7 @@ namespace LensDotNet.Tests.Client.Gasless
                 Enable = true
             });
 
+            resp.TypedData.Domain.ChainId = "1";
             string signed = Web3Helper.SignTypedData(resp.TypedData.Domain, _account.PrivateKey);
             Assert.IsNotEmpty(signed);
         }
