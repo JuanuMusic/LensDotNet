@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LensDotNet.Tests.Client
 {
-    public class LensClient_Test
+    public class LensClientTest
     {
         LensClient client;
         [SetUp] public void SetUp() {
