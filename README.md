@@ -61,6 +61,8 @@ foreach (var profile in profiles.Items)
 
 For more examples, take a look at the [Examples folder](https://github.com/JuanuMusic/LensDotNet/tree/main/src/Examples) or explore the [Tests](https://github.com/JuanuMusic/LensDotNet/tree/main/src/LensDotNet.Client.Tests).
 
+Also, a guide for using with Unity is in progress. [Look Here](https://github.com/JuanuMusic/LensDotNet/tree/main/src/Examples/LensDotNet.Examples.Unity/README.md).
+
 ## Contributing
 
 We welcome contributions to improve and expand the functionality of LensDotNet. Please follow these guidelines to contribute:
