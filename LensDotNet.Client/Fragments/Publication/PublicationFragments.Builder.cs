@@ -92,7 +92,7 @@ namespace LensDotNet.Client.Fragments.Publication
                 IsGated = comment.IsGated,
                 Metadata = comment.Metadata(m => m.AsFragment()),
                 //Mirrors = comment.Mirrors(null),
-                Profile = comment.Profile(p => p.AsProfileFragment()),
+                Profile = comment.Profile(p => p.AsFragment()),
                 Reaction = comment.Reaction(null),
                 Stats = comment.Stats(s => s.AsFragment())
             };
@@ -140,5 +140,12 @@ namespace LensDotNet.Client.Fragments.Publication
                 PageInfo = paginatedResult.PageInfo(pi => pi.AsCommonPaginatedResultInfo())
             };
 
+        [GraphQLFragment]
+        public static PaginatedResult<PublicationFragment> AsPaginatedResult<T>(this ExplorePublicationResult resultInfo)
+            => new PaginatedResult<PublicationFragment>
+            {
+                PageInfo = resultInfo.PageInfo(pi => pi.AsCommonPaginatedResultInfo()),
+                Items = resultInfo.Items(itm => itm.AsFragment())
+            };
     }
 }

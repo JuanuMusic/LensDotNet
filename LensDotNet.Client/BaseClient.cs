@@ -1,4 +1,4 @@
-﻿using LensDotNet.Authentication;
+﻿using LensDotNet.Client.Authentication;
 using LensDotNet.Config;
 using System;
 using System.Collections.Generic;
@@ -16,10 +16,30 @@ namespace LensDotNet.Client
 
         public BaseClient(LensConfig config, AuthenticationClient? authentication = null)
         {
-            _authentication = authentication;
             var httpClient = new HttpClient();
             httpClient.BaseAddress = config.GqlEndpoint;
             _client = new LensGraphQLClient(httpClient);
+            _authentication = authentication;
+            if (_authentication != null)
+            {
+                UpdateAuthHeader();
+                _authentication.OnAuthChanged += _authentication_OnAuthChanged;
+            }
+        }
+
+        private void _authentication_OnAuthChanged(object sender, EventArgs e)
+            => UpdateAuthHeader();
+
+        private void UpdateAuthHeader()
+        {
+            if (_authentication == null) return;
+
+            string AUTH_HEADER = "Authorization";
+            string token = $"Bearer {_authentication.AccessToken}";
+            if (_client.HttpClient.DefaultRequestHeaders.Contains(AUTH_HEADER))
+                _client.HttpClient.DefaultRequestHeaders.Remove(AUTH_HEADER);
+
+            _client.HttpClient.DefaultRequestHeaders.Add(AUTH_HEADER, token);
         }
     }
 }

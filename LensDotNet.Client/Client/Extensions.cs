@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using ZeroQL;
 
-namespace LensDotNetLensDotNet.Client
+namespace LensDotNet.Client
 {
-    public static class ExceptionsExtensions
+    public static class Extensions
     {
         /// <summary>
         /// Converts an array of <see cref="GraphQLError"/> into an <see cref="AggregateException"/>
@@ -17,6 +19,10 @@ namespace LensDotNetLensDotNet.Client
         public static AggregateException ToException(this GraphQueryError[] errors, string message)
             => new AggregateException(message, errors.Select(err => new Exception(err.Message)).ToArray());
 
-
+        public static void AssertErrors<T>(this GraphQLResult<T> resp)
+        {
+            if (resp.Errors != null && resp.Errors.Length > 0)
+                throw resp.Errors.ToException("GraphQL Result Errors occured");
+        }
     }
 }

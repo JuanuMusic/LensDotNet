@@ -35,7 +35,7 @@ namespace LensDotNet.Tests.Client.Profile
         public void Test_AllRecommended_Should_Run_Succesfully()
         {
             var client = new ProfileClient(TestConfigs.DEV_CONFIG);
-            Assert.DoesNotThrowAsync(async () => await client.AllRecommended(null));
+            Assert.DoesNotThrowAsync(async () => await client.AllRecommended(null)) ;
         }
 
         [Test]
@@ -86,16 +86,6 @@ namespace LensDotNet.Tests.Client.Profile
                 Address = "0x088C3152A5Ad1892236b312f18405Df3586Aca87",
                 ProfileId = TestConfigs.EXISTING_PROFILE_ID
             }));
-        }
-
-        [Test]
-        public async Task Test_ExploreProfiles_ShouldFetchProfilesSuccesfully()
-        {
-            var client = new ProfileClient(TestConfigs.DEV_CONFIG);
-            var profiles = await client.ExploreProfiles();
-            Assert.IsNotNull(profiles);
-            Assert.IsNotNull(profiles.Items);
-            Assert.Greater(profiles.Items.Length, 0);
         }
     }
 }

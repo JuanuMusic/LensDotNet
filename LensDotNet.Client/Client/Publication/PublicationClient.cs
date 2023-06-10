@@ -1,5 +1,6 @@
-﻿using LensDotNet.Authentication;
+﻿using LensDotNet.Client.Authentication;
 using LensDotNet.Client.Fragments.Common;
+using LensDotNet.Client.Fragments.Gasless;
 using LensDotNet.Client.Fragments.Profile;
 using LensDotNet.Client.Fragments.Publication;
 using LensDotNet.Config;
@@ -9,7 +10,7 @@ namespace LensDotNet.Client
 {
     public class PublicationClient : BaseClient
     {
-        public PublicationClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication) {}
+        public PublicationClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication) { }
 
         public async Task<PaginatedResult<PublicationForSaleFragment>> AllForSale(ProfilePublicationsForSaleRequest forSaleRequest)
         {
@@ -24,14 +25,14 @@ namespace LensDotNet.Client
             return resp.Data;
         }
 
-        public async Task <PaginatedResult<WalletFragment>> AllWalletsWhoCollected(WhoCollectedPublicationRequest whoCollectedPublicationRequest)
+        public async Task<PaginatedResult<WalletFragment>> AllWalletsWhoCollected(WhoCollectedPublicationRequest whoCollectedPublicationRequest)
         {
             var request = new
             {
                 Input = whoCollectedPublicationRequest
             };
             var resp = await _client.Query(request,
-                static (i, o) => o.WhoCollectedPublication<PaginatedResult<WalletFragment>>(i.Input,
+                static (i, o) => o.WhoCollectedPublication(i.Input,
                     output => output.AsPaginatedResult()));
 
             return resp.Data;
@@ -55,7 +56,7 @@ namespace LensDotNet.Client
                 Input = publicationsQueryRequest
             };
             var resp = await _client.Query(request,
-                static (i, o) => o.Publications<PaginatedResult<PublicationFragment>>(i.Input,
+                static (i, o) => o.Publications(i.Input,
                     output => output.AsPaginatedResult<PublicationFragment>()));
 
             return resp.Data;
@@ -92,6 +93,29 @@ namespace LensDotNet.Client
             var resp = await _client.Query(request, static (i, o) => o.ValidatePublicationMetadata(i.Input,
                 o => new PublicationValidateMetadataResult { Reason = o.Reason, Valid = o.Valid }));
 
+            return resp.Data;
+        }
+
+        /// <summary>
+        /// Create a post using dispatcher. Profile has to have the dispatcher enabled.
+        /// ⚠️ Requires authenticated <see cref="PublicationClient"/>.
+        /// </summary>
+        public async Task<RelayResultFragment> CreatePostViaDispatcher(CreatePublicPostRequest request)
+        {
+            var req = new
+            {
+                Input = request
+            };
+
+            if (_authentication == null || !await _authentication.IsAuthenticated())
+                throw new System.Exception("Client not authenticated.");
+
+            var resp = await _client.Mutation(req, static (i, o) => o.CreatePostViaDispatcher(i.Input, output => output.AsFragment()));
+            if (resp.Errors != null && resp.Errors.Length > 0)
+                throw resp.Errors.ToException("An unhandled exception occurred while creating post via dispatcher");
+
+            if (resp.Data != null && resp.Data.Error != null)
+                throw new System.Exception(resp.Data.Error.Reason.ToString());
             return resp.Data;
         }
     }

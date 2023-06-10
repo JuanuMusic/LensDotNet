@@ -1,8 +1,9 @@
-﻿using LensDotNet.Authentication;
+﻿using LensDotNet.Client.Authentication;
 using LensDotNet.Client.Fragments.Common;
+using LensDotNet.Client.Fragments.Gasless;
 using LensDotNet.Client.Fragments.Profile;
+using LensDotNet.Client.Fragments.Publication;
 using LensDotNet.Config;
-using LensDotNetLensDotNet.Client;
 using System;
 using System.Threading.Tasks;
 
@@ -10,24 +11,16 @@ namespace LensDotNet.Client
 {
     public class ProfileClient : BaseClient
     {
-        
-        public ProfileClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication){}
+
+        public ProfileClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication) { }
 
         public async Task<ProfileFragment> Fetch(SingleProfileQueryRequest profileRequest, string? observerId = null)
         {
-            var request = new
-            {
-                Input = new SingleProfileQueryRequest
-                {
-                    Handle = profileRequest.Handle,
-                    ProfileId = profileRequest.ProfileId
-                }
-            };
-            var resp = await _client.Query(request, static (i, o) => o.Profile<ProfileFragment>(i.Input, output => output.AsProfileFragment()));
-            if(resp.Errors != null && resp.Errors.Length > 0)
-            {
+            var resp = await _client.Query(new { Input = profileRequest }, static (i, o) => o.Profile(i.Input, output => output.AsFragment()));
+            
+            if (resp.Errors != null && resp.Errors.Length > 0)
                 throw resp.Errors.ToException("An unhandled exception occurred while fetching single profile");
-            }
+            
             return resp.Data;
         }
 
@@ -53,7 +46,7 @@ namespace LensDotNet.Client
                 Input = profileRequest
             };
             var resp = await _client.Query(request,
-                static (i, o) => o.Profiles<PaginatedResult<ProfileFragment>>(i.Input,
+                static (i, o) => o.Profiles(i.Input,
                     output => output.AsPaginatedResult<ProfileFragment>()));
             if (resp.Errors != null && resp.Errors.Length > 0)
             {
@@ -66,10 +59,10 @@ namespace LensDotNet.Client
         {
             var req = new
             {
-                Input = options
+                Input = options ?? new RecommendedProfileOptions()
             };
 
-            var resp = await _client.Query(req, static (i, output) => output.RecommendedProfiles(i.Input, p => p.AsProfileFragment()));
+            var resp = await _client.Query(req, static (i, output) => output.RecommendedProfiles(i.Input, p => p.AsFragment()));
             if (resp.Errors != null && resp.Errors.Length > 0)
             {
                 throw resp.Errors.ToException("An unhandled exception occurred while fetching all recommended profiles");
@@ -101,7 +94,7 @@ namespace LensDotNet.Client
                 Input = doesFollowRequest
             };
             var resp = await _client.Query(request,
-                static (i, o) => o.DoesFollow<DoesFollowFragment>(i.Input,
+                static (i, o) => o.DoesFollow(i.Input,
                     output => output.AsDoesFollowFragment()));
             if (resp.Errors != null && resp.Errors.Length > 0)
             {
@@ -117,7 +110,7 @@ namespace LensDotNet.Client
                 Input = followingRequest
             };
             var resp = await _client.Query(request,
-                static (i, o) => o.Following<PaginatedResult<FollowingFragment>>(i.Input,
+                static (i, o) => o.Following(i.Input,
                     output => output.AsPaginatedResult<FollowingFragment>()));
 
             return resp.Data;
@@ -130,7 +123,7 @@ namespace LensDotNet.Client
                 Input = followersRequest
             };
             var resp = await _client.Query(request,
-                static (i, o) => o.Followers<PaginatedResult<FollowerFragment>>(i.Input,
+                static (i, o) => o.Followers(i.Input,
                     output => output.AsPaginatedResult()));
 
             return resp.Data;
@@ -146,26 +139,31 @@ namespace LensDotNet.Client
                 static (i, o) => o.FollowerNftOwnedTokenIds(i.Input,
                     output => output.AsFragment()));
 
-            return resp.Data;
-        }
-
-        public async Task<PaginatedResult<ProfileFragment>> ExploreProfiles()
-        {
-            var request = new
-            {
-                Input = new ExploreProfilesRequest { SortCriteria = ProfileSortCriteria.MostFollowers }
-            };
-            var resp = await _client.Query(request,
-                static (i, o) => o.ExploreProfiles(i.Input,
-                    output => output.AsPaginatedResult<ProfileFragment>()));
-
             if (resp.Errors != null && resp.Errors.Length > 0)
             {
-                throw resp.Errors.ToException("An unhandled exception occurred while fetching explore profiles");
+                throw resp.Errors.ToException("An unhandled exception occurred while fetching FollowerNftOwnedTokenIds");
             }
-            
             return resp.Data;
-            
         }
+
+        public async Task<RelayResultFragment> CreateProfile(CreateProfileRequest createProfileRequest)
+        {
+
+            var req = new
+            {
+                Input = createProfileRequest
+            };
+
+            if (_authentication == null || !await _authentication.IsAuthenticated())
+                throw new Exception("Client not authenticated.");
+
+            var resp = await _client.Mutation(req, static (i, o) => o.CreateProfile(i.Input, output => output.AsFragment()));
+            if (resp.Errors != null && resp.Errors.Length > 0)
+                throw resp.Errors.ToException("An unhandled exception occurred while creating post via dispatcher");
+
+            return resp.Data;
+        }
+
+
     }
 }

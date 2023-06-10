@@ -1,4 +1,5 @@
 ﻿using LensDotNet.Client.Fragments.Common;
+using LensDotNet.Client.Fragments.Gasless;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace LensDotNet.Client.Fragments.Profile
             => new PaginatedResult<ProfileFragment>
             {
                 PageInfo = resultInfo.PageInfo(pi => pi.AsCommonPaginatedResultInfo()),
-                Items = resultInfo.Items(itm => itm.AsProfileFragment())
+                Items = resultInfo.Items(itm => itm.AsFragment())
             };
 
         [GraphQLFragment]
@@ -30,12 +31,12 @@ namespace LensDotNet.Client.Fragments.Profile
         public static PaginatedResult<ProfileFragment> AsPaginatedResult<T>(this ExploreProfileResult resultInfo)
           => new PaginatedResult<ProfileFragment>
           {
-              Items = resultInfo.Items(itm => itm.AsProfileFragment()),
+              Items = resultInfo.Items(itm => itm.AsFragment()),
               PageInfo = resultInfo.PageInfo(pi => pi.AsCommonPaginatedResultInfo())
           };
 
         [GraphQLFragment]
-        public static ProfileFragment AsProfileFragment(this Client.Profile profile)
+        public static ProfileFragment AsFragment(this Client.Profile profile)
             => new ProfileFragment
             {
                 Id = profile.Id,
@@ -44,7 +45,8 @@ namespace LensDotNet.Client.Fragments.Profile
                 Interests = profile.Interests,
                 IsDefault = profile.IsDefault,
                 Name = profile.Name,
-                OwnedBy = profile.OwnedBy
+                OwnedBy = profile.OwnedBy,
+                Dispatcher = profile.Dispatcher(d => d.AsFragment())
             };
 
         [GraphQLFragment]
@@ -76,7 +78,7 @@ namespace LensDotNet.Client.Fragments.Profile
 
         [GraphQLFragment]
         public static FollowingFragment AsFollowingFragment(this Following response)
-           => new FollowingFragment { Profile = response.Profile(p => p.AsProfileFragment()) };
+           => new FollowingFragment { Profile = response.Profile(p => p.AsFragment()) };
 
         [GraphQLFragment]
         public static FollowerFragment AsFollowerFragment(this Follower response)
