@@ -1,5 +1,0 @@
-﻿query Challenge($address: EthereumAddress!) {
-  result: challenge(request: { address: $address}) {
-    text
-  }
-}

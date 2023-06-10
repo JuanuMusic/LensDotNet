@@ -1,7 +1,0 @@
-{
-  "$schema": "https://api-sandbox-mumbai.lens.dev/graphql/",
-  "graphql": "./schema.graphql",
-  "namespace": "LensDotNet.Client",
-  "clientName": "LensGQLClient",
-  "output": "./Generated/GraphQL.g.cs"
-}

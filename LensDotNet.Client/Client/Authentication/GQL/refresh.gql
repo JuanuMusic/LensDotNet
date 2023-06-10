@@ -1,6 +1,0 @@
-mutation Refresh($refreshToken: Jwt!) {
-  result: refresh(request: { refreshToken: $refreshToken }) {
-    accessToken
-    refreshToken
-  }
-}
