@@ -1,4 +1,5 @@
 # LensDotNet
+![LensDotNetLogo](assets/lensdotnetlogo.png?raw=true)
 
 LensDotNet is a .NET library that provides an easy and efficient way to interact with the Lens API. This library enables you to seamlessly utilize Lens API in various platforms, such as desktop applications, mobile apps using Xamarin, and games using Unity.
 
@@ -81,15 +82,18 @@ Here's the tentative roadmap for upcoming features. Feel free to suggest new fea
 - [.] Clients
   - [x] Profile Client
   - [x] Authentication Client
-  - [ ] Publication Client
-    - [ ] Create Publication
+  - [x] Publication Client
+    - [x] Create Publication
+  - [ ] Transaction Client
+  - [ ] ... TODO: add more clients ...
 - [ ] Comprehensive documentation
 
 ## Acknowledgements
 
 - [Stanislav Silin](https://github.com/byme8) for his amazing work on [ZeroQL](https://github.com/byme8/ZeroQL), the underlying graphQL client used. Also for pushing the .netstandard support so fast as well as figuring out the use in Unity. 
 - [Grabriel Weyer](https://github.com/gabrielweyer) from whom I copied and pasted his [JWT decoder implementation](https://github.com/gabrielweyer/dotnet-decode-jwt/blob/f304f17b910e6233d1053a98bda3d8ada5e10d3e/src/dotnet-decode-jwt/JwtClaimsDecoder.cs), which allowed me to reduce the number of dependencies
-- A todos los que me estan mirando 👀
+- [Juan Blanco](https://github.com/juanfranblanco), the genius behind [Nethereum](https://nethereum.com/), which has been the most helpful for building tests.  
+- A toda mi familia y a todos los que me estan viendo 👀
 
 ## License
 

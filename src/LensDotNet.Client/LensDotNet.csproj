@@ -13,7 +13,7 @@
 	  <RepositoryUrl>https://github.com/JuanuMusic/LensDotNet</RepositoryUrl>
 	  <PackageTags>lensprotocol;lens protocol;graphql;linq;lens</PackageTags>
 	  <NeutralLanguage>en</NeutralLanguage>
-	  <Version>1.0.2</Version>
+	  <Version>1.0.3</Version>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -26,6 +26,13 @@
 
   <ItemGroup>
     <Folder Include="Generated\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
