@@ -59,6 +59,8 @@ foreach (var profile in profiles.Items)
 
 ```
 
+For more examples, take a look at the [Examples folder](https://github.com/JuanuMusic/LensDotNet/tree/main/src/Examples) or explore the [Tests](https://github.com/JuanuMusic/LensDotNet/tree/main/src/LensDotNet.Client.Tests).
+
 ## Contributing
 
 We welcome contributions to improve and expand the functionality of LensDotNet. Please follow these guidelines to contribute:

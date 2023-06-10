@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LensDotNet" Version="1.0.3" />
+    <ProjectReference Include="..\..\LensDotNet.Client\LensDotNet.csproj" />
   </ItemGroup>
 
 </Project>
