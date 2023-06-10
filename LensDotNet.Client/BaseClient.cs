@@ -1,4 +1,4 @@
-﻿using LensDotNet.Authentication;
+﻿using LensDotNet.Client.Authentication;
 using LensDotNet.Config;
 using System;
 using System.Collections.Generic;

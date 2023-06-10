@@ -1,9 +1,8 @@
-﻿using LensDotNet.Authentication;
+﻿using LensDotNet.Client.Authentication;
 using LensDotNet.Client.Fragments.Common;
 using LensDotNet.Client.Fragments.Profile;
 using LensDotNet.Client.Fragments.Publication;
 using LensDotNet.Config;
-using LensDotNetLensDotNet.Client;
 using System.Threading.Tasks;
 
 namespace LensDotNet.Client
@@ -18,7 +17,7 @@ namespace LensDotNet.Client
         {
             var request = new
             {
-                Input = new ExploreProfilesRequest { SortCriteria = profileSortCriteria}
+                Input = new ExploreProfilesRequest { SortCriteria = profileSortCriteria }
             };
             var resp = await _client.Query(request,
                 static (i, o) => o.ExploreProfiles(i.Input,

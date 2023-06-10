@@ -1,9 +1,9 @@
-﻿using LensDotNet.Authentication;
+﻿using LensDotNet.Client.Authentication;
 using LensDotNet.Client.Fragments.Common;
+using LensDotNet.Client.Fragments.Gasless;
 using LensDotNet.Client.Fragments.Profile;
 using LensDotNet.Client.Fragments.Publication;
 using LensDotNet.Config;
-using LensDotNetLensDotNet.Client;
 using System.Threading.Tasks;
 
 namespace LensDotNet.Client
@@ -32,7 +32,7 @@ namespace LensDotNet.Client
                 Input = whoCollectedPublicationRequest
             };
             var resp = await _client.Query(request,
-                static (i, o) => o.WhoCollectedPublication<PaginatedResult<WalletFragment>>(i.Input,
+                static (i, o) => o.WhoCollectedPublication(i.Input,
                     output => output.AsPaginatedResult()));
 
             return resp.Data;
@@ -56,7 +56,7 @@ namespace LensDotNet.Client
                 Input = publicationsQueryRequest
             };
             var resp = await _client.Query(request,
-                static (i, o) => o.Publications<PaginatedResult<PublicationFragment>>(i.Input,
+                static (i, o) => o.Publications(i.Input,
                     output => output.AsPaginatedResult<PublicationFragment>()));
 
             return resp.Data;
@@ -107,9 +107,9 @@ namespace LensDotNet.Client
                 Input = request
             };
 
-            if (this._authentication == null || !await this._authentication.IsAuthenticated())
+            if (_authentication == null || !await _authentication.IsAuthenticated())
                 throw new System.Exception("Client not authenticated.");
-            
+
             var resp = await _client.Mutation(req, static (i, o) => o.CreatePostViaDispatcher(i.Input, output => output.AsFragment()));
             if (resp.Errors != null && resp.Errors.Length > 0)
                 throw resp.Errors.ToException("An unhandled exception occurred while creating post via dispatcher");

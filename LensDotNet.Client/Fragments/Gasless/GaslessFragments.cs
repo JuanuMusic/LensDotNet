@@ -8,6 +8,7 @@ namespace LensDotNet.Client.Fragments.Gasless
 {
     public record CreateSetDispatcherEIP712TypedDataTypesFragment
     {
+        [JsonPropertyName("SetDispatcherWithSig")]
         public EIP712TypedDataField[] SetDispatcherWithSig { get;  set; }
     }
     public record EIP712TypedDataDomainFragment
@@ -38,5 +39,18 @@ namespace LensDotNet.Client.Fragments.Gasless
         public BroadcastId Id { get; set; }
         public DateTimeOffset ExpiresAt { get; set; }
         public CreateSetDispatcherEIP712TypedDataFragment TypedData { get; set; }
+    }
+
+    public record RelayResultFragment
+    {
+        public RelayerResult? Result { get; set; }
+        public RelayError? Error { get; set; }
+    }
+
+    public record DispatcherFragment
+    {
+       public EthereumAddress Address { get; set; }
+        public bool CanUseRelay { get; set; }
+        public bool Sponsor { get; set; }
     }
 }

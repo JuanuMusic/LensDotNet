@@ -1,5 +1,5 @@
-﻿using LensDotNet.Authentication;
-using LensDotNet.Client;
+﻿using LensDotNet.Client;
+using LensDotNet.Client.Authentication;
 using LensDotNet.Client.Fragments.Gasless;
 using LensDotNet.Tests.Utils;
 using Nethereum.ABI.EIP712;

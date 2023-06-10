@@ -69,7 +69,7 @@ namespace LensDotNet.Client
                 case PublicationReportReason.SCAM:
                 case PublicationReportReason.UNAUTHORIZED_SALE:
                     return new ReportingReasonInputParams
-                    
+
                     {
                         FraudReason = new FraudReasonInputParams { Reason = PublicationReportingReason.Fraud, Subreason = PublicationReportingFraudSubreason.Scam }
                     };
@@ -91,7 +91,7 @@ namespace LensDotNet.Client
                 case PublicationReportReason.MISLEADING:
                     return new ReportingReasonInputParams
                     {
-                        SpamReason = new SpamReasonInputParams { Reason = PublicationReportingReason.Spam, Subreason = PublicationReportingSpamSubreason.Misleading}
+                        SpamReason = new SpamReasonInputParams { Reason = PublicationReportingReason.Spam, Subreason = PublicationReportingSpamSubreason.Misleading }
                     };
                 case PublicationReportReason.MISUSE_HASHTAGS:
                     return new ReportingReasonInputParams

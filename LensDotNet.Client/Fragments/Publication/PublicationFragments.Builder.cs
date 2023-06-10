@@ -92,7 +92,7 @@ namespace LensDotNet.Client.Fragments.Publication
                 IsGated = comment.IsGated,
                 Metadata = comment.Metadata(m => m.AsFragment()),
                 //Mirrors = comment.Mirrors(null),
-                Profile = comment.Profile(p => p.AsProfileFragment()),
+                Profile = comment.Profile(p => p.AsFragment()),
                 Reaction = comment.Reaction(null),
                 Stats = comment.Stats(s => s.AsFragment())
             };
@@ -146,14 +146,6 @@ namespace LensDotNet.Client.Fragments.Publication
             {
                 PageInfo = resultInfo.PageInfo(pi => pi.AsCommonPaginatedResultInfo()),
                 Items = resultInfo.Items(itm => itm.AsFragment())
-            };
-
-        [GraphQLFragment]
-        public static RelayResultFragment AsFragment(this RelayResult relayResult)
-            => new RelayResultFragment
-            {
-                Result = relayResult.On<RelayerResult>().Select(rr => new RelayerResult { TxHash = rr.TxHash, TxId = rr.TxId }),
-                Error = relayResult.On<RelayError>().Select(re => new RelayError { Reason = re.Reason })
             };
     }
 }

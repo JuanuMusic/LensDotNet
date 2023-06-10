@@ -22,7 +22,7 @@ namespace LensDotNet.Client.Fragments.Common
         public static WalletFragment AsFragment(this Wallet wallet)
             => new WalletFragment { 
                 Address = wallet.Address, 
-                DefaultProfile = wallet.DefaultProfile(p => p.AsProfileFragment())
+                DefaultProfile = wallet.DefaultProfile(p => p.AsFragment())
             };
 
         [GraphQLFragment]

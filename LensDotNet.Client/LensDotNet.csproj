@@ -6,7 +6,7 @@
 	  <LangVersion>latestmajor</LangVersion>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <Title>LensDotNet</Title>
-	  <Authors>juanu</Authors>
+	  <Authors>juanumusic</Authors>
 	  <Company>$(Company)</Company>
 	  <Description>A .NET Standard implementation of the Lens Protocol SDK with graphql support.</Description>
 	  <Copyright>MIT</Copyright>
@@ -20,12 +20,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Authentication\GQL\AuthQueries.cs" />
+    <Compile Remove="Client\Authentication\GQL\AuthQueries.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Generated\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
     <PackageReference Include="System.Text.Json" Version="7.0.2" />
     <PackageReference Include="ZeroQL" Version="4.1.0" />
   </ItemGroup>

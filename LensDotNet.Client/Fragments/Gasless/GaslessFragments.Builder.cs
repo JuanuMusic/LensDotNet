@@ -1,6 +1,8 @@
-﻿using System;
+﻿using LensDotNet.Client.Fragments.Publication;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using ZeroQL;
 
 namespace LensDotNet.Client.Fragments.Gasless
 {
@@ -52,5 +54,17 @@ namespace LensDotNet.Client.Fragments.Gasless
             {
                 SetDispatcherWithSig = input.SetDispatcherWithSig(o => new EIP712TypedDataField { Name = o.Name, Type = o.Type })
             };
+
+        [ZeroQL.GraphQLFragment]
+        public static RelayResultFragment AsFragment(this RelayResult relayResult)
+            => new RelayResultFragment
+            {
+                Result = relayResult.On<RelayerResult>().Select(rr => new RelayerResult { TxHash = rr.TxHash, TxId = rr.TxId }),
+                Error = relayResult.On<RelayError>().Select(re => new RelayError { Reason = re.Reason })
+            };
+
+        [ZeroQL.GraphQLFragment]
+        public static DispatcherFragment AsFragment(this Dispatcher dispatcher)
+            => new DispatcherFragment { Address = dispatcher.Address, CanUseRelay = dispatcher.CanUseRelay, Sponsor = dispatcher.Sponsor };
     }
 }

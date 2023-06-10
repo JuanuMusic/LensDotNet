@@ -1,5 +1,5 @@
-﻿using LensDotNet.Authentication;
-using LensDotNet.Client;
+﻿using LensDotNet.Client;
+using LensDotNet.Client.Authentication;
 using LensDotNet.Tests.Utils;
 using Nethereum.Web3.Accounts;
 
@@ -55,6 +55,7 @@ namespace LensDotNet.Tests.Client.Publication
 
             Assert.IsNotNull(resp);
             Assert.IsNotNull(resp.Result);
+            Assert.IsNotNull(resp.Result.TxId);
         }
     }
 }

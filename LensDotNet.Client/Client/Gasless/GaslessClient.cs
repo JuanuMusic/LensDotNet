@@ -1,8 +1,7 @@
-﻿using LensDotNet.Authentication;
+﻿using LensDotNet.Client.Authentication;
 using LensDotNet.Client.Fragments.Gasless;
 using LensDotNet.Client.Fragments.Publication;
 using LensDotNet.Config;
-using LensDotNetLensDotNet.Client;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,8 +22,8 @@ namespace LensDotNet.Client
                 Input = setDispatcherRequest
             };
 
-            if (this._authentication == null || !await this._authentication.IsAuthenticated())
-                throw new System.Exception("Client not authenticated.");
+            if (_authentication == null || !await _authentication.IsAuthenticated())
+                throw new Exception("Client not authenticated.");
 
             var resp = await _client.Mutation(req, static (i, o) => o.CreateSetDispatcherTypedData(null, i.Input, output => output.AsFragment()));
             if (resp.Errors != null && resp.Errors.Length > 0)

@@ -1,4 +1,5 @@
 ﻿using LensDotNet.Client.Fragments.Common;
+using LensDotNet.Client.Fragments.Gasless;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace LensDotNet.Client.Fragments.Profile
         public bool IsFollowedByMe { get; set; }
         public bool IsFollowing { get; set; }
         public string Picture { get; set; }
-        public Dispatcher Dispatcher { get; set; }
+        public DispatcherFragment Dispatcher { get; set; }
     }
 
     public record ProfileStatsFragment

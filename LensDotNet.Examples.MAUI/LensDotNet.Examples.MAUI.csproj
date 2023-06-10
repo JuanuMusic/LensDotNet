@@ -53,7 +53,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\LensDotNet.Client\LensDotNet.Client.csproj" />
+	  <ProjectReference Include="..\LensDotNet.Client\LensDotNet.csproj" />
 	</ItemGroup>
 
 </Project>

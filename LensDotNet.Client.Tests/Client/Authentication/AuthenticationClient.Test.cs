@@ -1,4 +1,4 @@
-﻿using LensDotNet.Authentication;
+﻿using LensDotNet.Client;
 using LensDotNet.Tests.Utils;
 using Nethereum.Web3.Accounts;
 

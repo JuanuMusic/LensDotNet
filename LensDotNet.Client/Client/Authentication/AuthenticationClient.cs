@@ -4,7 +4,7 @@ using LensDotNet.Config;
 using System;
 using System.Threading.Tasks;
 
-namespace LensDotNet.Authentication
+namespace LensDotNet.Client
 {
     public interface IAuthenticationClient
     {
@@ -18,7 +18,7 @@ namespace LensDotNet.Authentication
         public event EventHandler OnAuthChanged;
         private readonly ILensAuthenticationApi _api;
         private CredentialsAdapter _credentials;
-        public string AccessToken { get => _credentials != null ? _credentials.AccessToken : string.Empty;  }
+        public string AccessToken { get => _credentials != null ? _credentials.AccessToken : string.Empty; }
 
         public AuthenticationClient(LensConfig config)
             => _api = new LensAuthenticationApi(config.GqlEndpoint);
@@ -41,12 +41,12 @@ namespace LensDotNet.Authentication
             if (!_credentials.ShouldRefresh())
                 return true;
 
-            if(_credentials.CanRefresh())
+            if (_credentials.CanRefresh())
             {
                 var newCredentials = await _api.Refresh(_credentials.RefreshToken);
-                if (newCredentials == null) 
+                if (newCredentials == null)
                     return false;
-                
+
                 _credentials = new CredentialsAdapter(newCredentials);
                 if (OnAuthChanged != null) OnAuthChanged.Invoke(this, new EventArgs());
                 return true;
