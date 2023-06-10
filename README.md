@@ -79,7 +79,8 @@ Here's the tentative roadmap for upcoming features. Feel free to suggest new fea
 - [ ] Advanced API methods
 - [x] ~~Xamarin~~ MAUI support
   - [ ] Improved MAUI examples
-- [.] Clients
+- [ ] Clients
+  - [ ] Lens Client
   - [x] Profile Client
   - [x] Authentication Client
   - [x] Publication Client
@@ -87,7 +88,11 @@ Here's the tentative roadmap for upcoming features. Feel free to suggest new fea
   - [ ] Transaction Client
   - [ ] ... TODO: add more clients ...
 - [ ] Comprehensive documentation
-
+  - [ ] Unity Implementation
+- [x] Examples
+  - [x] Simple Console App
+  - [x] Simple MAUI App
+  - [x] Simple Unity
 ## Acknowledgements
 
 - [Stanislav Silin](https://github.com/byme8) for his amazing work on [ZeroQL](https://github.com/byme8/ZeroQL), the underlying graphQL client used. Also for pushing the .netstandard support so fast as well as figuring out the use in Unity. 
