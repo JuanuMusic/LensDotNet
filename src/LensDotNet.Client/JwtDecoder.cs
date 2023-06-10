@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace LendsDotnet.Client
+namespace LensDotnet.Client
 {
     internal static class JwtClaimsDecoder
     {

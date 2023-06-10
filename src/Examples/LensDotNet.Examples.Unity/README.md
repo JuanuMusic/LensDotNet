@@ -1,4 +1,4 @@
-# Use LendsDotNet in Unity
+# Use LensDotNet in Unity
 LensDotNet is built to support the .NET Standard framework, which makes it compatible with Unity.
 
 A couple of extra steps have to be taken in order to use it in your project.

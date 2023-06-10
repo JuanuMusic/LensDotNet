@@ -1,4 +1,4 @@
-﻿using LendsDotnet.Client;
+﻿using LensDotnet.Client;
 using LensDotNet.Client.Json.Converters;
 using System;
 using System.Text.Json;
