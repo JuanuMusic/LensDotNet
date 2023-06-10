@@ -52,12 +52,5 @@ namespace LensDotNet.Tests.Client.Publication
             var client = new PublicationClient(TestConfigs.DEV_CONFIG);
             Assert.DoesNotThrowAsync(async () => await client.AllForSale(new ProfilePublicationsForSaleRequest { ProfileId = TestConfigs.EXISTING_PROFILE_ID }));
         }
-
-        [Test]
-        public async Task Test_MetadataStatus_Should_Run_Succesfully()
-        {
-            var client = new PublicationClient(TestConfigs.DEV_CONFIG);
-            Assert.DoesNotThrowAsync(async () => await client.MetadataStatus(new GetPublicationMetadataStatusRequest { PublicationId = TestConfigs.EXISTING_PUBLICATION_ID}));
-        }
     }
 }

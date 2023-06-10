@@ -62,13 +62,9 @@ namespace LensDotNet.Client
             return resp.Data;
         }
 
-        public async Task<PublicationMetadataStatus> MetadataStatus(GetPublicationMetadataStatusRequest getPublicationMetadataStatusRequest)
+        public async Task<PublicationMetadataStatus> MetadataStatus(TxId txId)
         {
-            var request = new
-            {
-                Input = getPublicationMetadataStatusRequest
-            };
-            var resp = await _client.Query(request,
+            var resp = await _client.Query(new { Input = new GetPublicationMetadataStatusRequest { TxId = txId } },
                 static (i, o) => o.PublicationMetadataStatus(i.Input,
                     output => new PublicationMetadataStatus { Status = output.Status, Reason = output.Reason }));
 

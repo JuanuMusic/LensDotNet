@@ -14,8 +14,7 @@ namespace LensDotNet.Tests.IPFS
         [SetUp]
         public void Setup()
         {
-            var httpClient = new HttpClient();
-            client = new IPFSClient(httpClient, new Uri("http://192.168.88.221:5001"));
+            client = new IPFSClient(new Uri(TestConfigs.IPFS_API_ENDPOINT), TestConfigs.IPFS_USERNAME, TestConfigs.IPFS_PASSWORD);
         }
 
         [Test]

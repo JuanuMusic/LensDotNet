@@ -147,5 +147,7 @@ namespace LensDotNet.Client.Fragments.Publication
                 PageInfo = resultInfo.PageInfo(pi => pi.AsCommonPaginatedResultInfo()),
                 Items = resultInfo.Items(itm => itm.AsFragment())
             };
+
+    
     }
 }
