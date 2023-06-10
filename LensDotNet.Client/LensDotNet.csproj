@@ -17,6 +17,7 @@
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <UserSecretsId>62f521aa-6648-44ec-81e2-c39e9401ec88</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

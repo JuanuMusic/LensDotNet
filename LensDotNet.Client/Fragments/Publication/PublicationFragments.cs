@@ -93,4 +93,9 @@ namespace LensDotNet.Client.Fragments.Publication
         public CommentFragment Comment { get; set; }
         public PostFragment Post { get; set; }
     }
+    
+    public record PublicationMetadataStatusFragment { 
+        public PublicationMetadataStatusType Status { get; set; }
+        public string Reason { get; set; }
+    }
 }

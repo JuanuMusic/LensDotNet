@@ -1,7 +1,4 @@
 ﻿using LensDotNet.Client.Fragments.Publication;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using ZeroQL;
 
 namespace LensDotNet.Client.Fragments.Gasless
@@ -45,7 +42,7 @@ namespace LensDotNet.Client.Fragments.Gasless
                 ExpiresAt = result.ExpiresAt,
                 Id = new BroadcastId(result.Id),
                 TypedData = result.TypedData(td => td.AsFragment())
-                
+
             };
 
         [ZeroQL.GraphQLFragment]
@@ -59,12 +56,53 @@ namespace LensDotNet.Client.Fragments.Gasless
         public static RelayResultFragment AsFragment(this RelayResult relayResult)
             => new RelayResultFragment
             {
-                Result = relayResult.On<RelayerResult>().Select(rr => new RelayerResult { TxHash = rr.TxHash, TxId = rr.TxId }),
-                Error = relayResult.On<RelayError>().Select(re => new RelayError { Reason = re.Reason })
+                Result = relayResult.On<RelayerResult>().Select(rr => new RelayerResultFragment { TxHash = rr.TxHash, TxId = rr.TxId }),
+                Error = relayResult.On<RelayError>().Select(re => new RelayErrorFragment { Reason = re.Reason })
             };
 
         [ZeroQL.GraphQLFragment]
         public static DispatcherFragment AsFragment(this Dispatcher dispatcher)
             => new DispatcherFragment { Address = dispatcher.Address, CanUseRelay = dispatcher.CanUseRelay, Sponsor = dispatcher.Sponsor };
+
+        [GraphQLFragment]
+        public static TransactionResultFragment AsFragment(this TransactionResult transactionResult)
+            => new TransactionResultFragment
+            {
+                Error = transactionResult.On<TransactionError>().Select(re => new TransactionErrorFragment { Reason = re.Reason }),
+                Result = transactionResult.On<TransactionIndexedResult>().Select(rr
+                    => new TransactionIndexedResultFragment
+                    {
+                        TxHash = rr.TxHash,
+                        Indexed = rr.Indexed,
+                        MetadataStatus = rr.MetadataStatus(ms => new PublicationMetadataStatusFragment { Reason = ms.Reason, Status = ms.Status })
+                    })
+            };
+
+        [GraphQLFragment]
+        public static TransactionReceiptFragment AsFragment(this TransactionReceipt txReceipt)
+            => new TransactionReceiptFragment
+            {
+                BlockHash = txReceipt.BlockHash,
+                ContractAddress = txReceipt.ContractAddress,
+                From = txReceipt.From,
+                GasUsed = txReceipt.GasUsed,
+                LogsBloom = txReceipt.LogsBloom,
+                Root = txReceipt.Root,
+                To = txReceipt.To,
+                TransactionHash = txReceipt.TransactionHash,
+                TransactionIndex = txReceipt.TransactionIndex
+            };
+
+        [GraphQLFragment]
+        public static RelayerResultFragment AsFragment(this RelayerResult result)
+            => new RelayerResultFragment
+            {
+                TxHash = result.TxHash,
+                TxId = result.TxId,
+            };
+
+        [GraphQLFragment]
+        public static RelayErrorFragment AsFragment<T>(this RelayError relayerError)
+            => new RelayErrorFragment { Reason = relayerError.Reason };
     }
 }

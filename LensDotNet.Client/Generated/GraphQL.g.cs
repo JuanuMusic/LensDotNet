@@ -2607,62 +2607,62 @@ namespace LensDotNet.Client
     [System.CodeDom.Compiler.GeneratedCode ( "ZeroQL" ,  "3.6.1.0" )]
     public class TransactionReceipt
     {
-        [ZeroQL.GraphQLFieldSelector("to")]
-        public global::LensDotNet.Client.EthereumAddress? To { get; set; }
+            [ZeroQL.GraphQLFieldSelector("to")]
+            public global::LensDotNet.Client.EthereumAddress? To { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("from")]
-        public global::LensDotNet.Client.EthereumAddress From { get; set; }
+            [ZeroQL.GraphQLFieldSelector("from")]
+            public global::LensDotNet.Client.EthereumAddress From { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("contractAddress")]
-        public global::LensDotNet.Client.ContractAddress? ContractAddress { get; set; }
+            [ZeroQL.GraphQLFieldSelector("contractAddress")]
+            public global::LensDotNet.Client.ContractAddress? ContractAddress { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("transactionIndex")]
-        public int TransactionIndex { get; set; }
+            [ZeroQL.GraphQLFieldSelector("transactionIndex")]
+            public int TransactionIndex { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("root")]
-        public string? Root { get; set; }
+            [ZeroQL.GraphQLFieldSelector("root")]
+            public string? Root { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("gasUsed")]
-        public string GasUsed { get; set; }
+            [ZeroQL.GraphQLFieldSelector("gasUsed")]
+            public string GasUsed { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("logsBloom")]
-        public string LogsBloom { get; set; }
+            [ZeroQL.GraphQLFieldSelector("logsBloom")]
+            public string LogsBloom { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("blockHash")]
-        public string BlockHash { get; set; }
+            [ZeroQL.GraphQLFieldSelector("blockHash")]
+            public string BlockHash { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("transactionHash")]
-        public global::LensDotNet.Client.TxHash TransactionHash { get; set; }
+            [ZeroQL.GraphQLFieldSelector("transactionHash")]
+            public global::LensDotNet.Client.TxHash TransactionHash { get; set; }
 
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never), JsonPropertyName("Logs")]
-        public Log[] __Logs { get; set; }
+            [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never), JsonPropertyName("Logs")]
+            public Log[] __Logs { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("logs")]
-        public T[] Logs<T>(Func<Log, T> selector)
-        {
-            return __Logs is null ? throw new NullReferenceException("Logs is null but it should not be null. Schema can be outdated.") : __Logs.Select(o => o is null ? throw new NullReferenceException("Logs is null but it should not be null. Schema can be outdated.") : selector(o)).ToArray();
-        }
+            [ZeroQL.GraphQLFieldSelector("logs")]
+            public T[] Logs<T>(Func<Log, T> selector)
+            {
+                return __Logs is null ? throw new NullReferenceException("Logs is null but it should not be null. Schema can be outdated.") : __Logs.Select(o => o is null ? throw new NullReferenceException("Logs is null but it should not be null. Schema can be outdated.") : selector(o)).ToArray();
+            }
 
-        [ZeroQL.GraphQLFieldSelector("blockNumber")]
-        public int BlockNumber { get; set; }
+            [ZeroQL.GraphQLFieldSelector("blockNumber")]
+            public int BlockNumber { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("confirmations")]
-        public int Confirmations { get; set; }
+            [ZeroQL.GraphQLFieldSelector("confirmations")]
+            public int Confirmations { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("cumulativeGasUsed")]
-        public string CumulativeGasUsed { get; set; }
+            [ZeroQL.GraphQLFieldSelector("cumulativeGasUsed")]
+            public string CumulativeGasUsed { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("effectiveGasPrice")]
-        public string EffectiveGasPrice { get; set; }
+            [ZeroQL.GraphQLFieldSelector("effectiveGasPrice")]
+            public string EffectiveGasPrice { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("byzantium")]
-        public bool Byzantium { get; set; }
+            [ZeroQL.GraphQLFieldSelector("byzantium")]
+            public bool Byzantium { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("type")]
-        public int Type { get; set; }
+            [ZeroQL.GraphQLFieldSelector("type")]
+            public int Type { get; set; }
 
-        [ZeroQL.GraphQLFieldSelector("status")]
-        public int? Status { get; set; }
+            [ZeroQL.GraphQLFieldSelector("status")]
+            public int? Status { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode ( "ZeroQL" ,  "3.6.1.0" )]

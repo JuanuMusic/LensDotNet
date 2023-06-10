@@ -12,12 +12,20 @@ namespace LensDotNet.IPFS
     public class IPFSClient
     {
         HttpClient _client;
-        public IPFSClient(HttpClient client, Uri baseUri = null)
+        public IPFSClient(Uri baseUri = null, string username = null, string password = null)
         {
-            _client = client;
+            _client = new HttpClient();
             if (baseUri != null)
                 _client.BaseAddress = baseUri;
+
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password)) {
+                var byteArray = Encoding.ASCII.GetBytes($"{username}:{password}");
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            }
         }
+
+        public IPFSClient(HttpClient client)
+            => _client = client;
 
         public async Task<AddResponse> Add(byte[] file, string filename)
         {

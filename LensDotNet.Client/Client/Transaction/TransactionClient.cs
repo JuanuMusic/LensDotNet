@@ -25,5 +25,19 @@ namespace LensDotNet.Client
             }
                 return resp.Data;
         }
+
+        public async Task<TransactionResultFragment> HasTxHashBeenIndexed(TxHash txHash)
+        {
+            var resp = await _client.Query(new { Input = new HasTxHashBeenIndexedRequest { TxHash = txHash } }, static (i, o) => o.HasTxHashBeenIndexed(i.Input, output => output.AsFragment()));
+            resp.AssertErrors();
+            return resp.Data;
+        }
+
+        public async Task<TransactionResultFragment> HasTxHashBeenIndexed(TxId txId)
+        {
+            var resp = await _client.Query(new { Input = new HasTxHashBeenIndexedRequest { TxId = txId } }, static (i, o) => o.HasTxHashBeenIndexed(i.Input, output => output.AsFragment()));
+            resp.AssertErrors();
+            return resp.Data;
+        }
     }
 }
