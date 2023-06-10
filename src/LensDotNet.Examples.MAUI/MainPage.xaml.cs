@@ -16,8 +16,8 @@ namespace LensDotNet.Examples.MAUI
         private async void OnButtonClicked(object sender, EventArgs e)
         {
             var config = new LensConfig(LensConfig.DEVELOPMENT_GQL_ENDPOINT);
-            var client = new ExploreClient(config);
-            var profiles = await client.ExploreProfiles();
+            var client = new LensClient(config);
+            var profiles = await client.Explore.ExploreProfiles();
 
             StringBuilder bldr = new StringBuilder();
                 bldr.AppendLine($"Found {profiles.Items.Length} profiles");
