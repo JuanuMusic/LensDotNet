@@ -42,19 +42,21 @@ Install-Package LensDotNet
 
 ## Usage
 
-Here's a simple example of how to use LensDotNet:
+Here's a very basic example of how to use LensDotNet:
 
 ```csharp
 using LensDotNet;
 
 // Create a LensClient instance
-var lensClient = new LensClient("your_api_key");
+var config = new LensConfig("https://api-mumbai.lens.dev");
+var client = new LensClient(config);
 
-// Call the appropriate API method
-var result = await lensClient.SomeApiMethodAsync(someParameters);
+// Call ExploreProfiles and print results.
+var profiles = await client.Explore.ExploreProfiles();
+Console.WriteLine($"Found {profiles.Items.Length} profiles");
+foreach (var profile in profiles.Items)
+    Console.WriteLine($"name: {profile.Name} - owner: {profile.OwnedBy} - id: {profile.Id}");
 
-// Handle the result
-Console.WriteLine("Result: " + result);
 ```
 
 ## Contributing
@@ -80,7 +82,7 @@ Here's the tentative roadmap for upcoming features. Feel free to suggest new fea
 - [x] ~~Xamarin~~ MAUI support
   - [ ] Improved MAUI examples
 - [ ] Clients
-  - [ ] Lens Client
+  - [x] Lens Client
   - [x] Profile Client
   - [x] Authentication Client
   - [x] Publication Client

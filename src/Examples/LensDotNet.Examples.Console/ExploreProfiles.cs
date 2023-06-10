@@ -8,8 +8,8 @@ namespace LensDotNet.Examples.CLI
         internal static async Task Run()
         {
             var config = new LensConfig(LensConfig.DEVELOPMENT_GQL_ENDPOINT);
-            var client = new ExploreClient(config);
-            var profiles = await client.ExploreProfiles();
+            var client = new LensClient(config);
+            var profiles = await client.Explore.ExploreProfiles();
 
             Console.WriteLine($"Found {profiles.Items.Length} profiles");
             foreach (var profile in profiles.Items)

@@ -13,9 +13,11 @@ namespace LensDotNet.Client
     {
         internal readonly AuthenticationClient? _authentication;
         internal readonly LensGraphQLClient _client;
+        internal readonly LensConfig _config;
 
         public BaseClient(LensConfig config, AuthenticationClient? authentication = null)
         {
+            _config = config;
             var httpClient = new HttpClient();
             httpClient.BaseAddress = config.GqlEndpoint;
             _client = new LensGraphQLClient(httpClient);

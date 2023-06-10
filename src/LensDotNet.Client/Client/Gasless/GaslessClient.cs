@@ -11,7 +11,7 @@ namespace LensDotNet.Client
 {
     public class GaslessClient : BaseClient
     {
-        public GaslessClient(LensConfig config, AuthenticationClient authentication = null) : base(config, authentication)
+        public GaslessClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication)
         {
         }
 
