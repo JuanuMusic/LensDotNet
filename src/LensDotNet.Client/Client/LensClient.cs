@@ -8,12 +8,11 @@ namespace LensDotNet.Client
 {
     public class LensClient : BaseClient
     {
-        public LensClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication)
+        public LensClient(LensConfig config) : base(config, new AuthenticationClient(config))
         {
         }
 
-        public AuthenticationClient _authClient;
-        public AuthenticationClient Authentication { get => _authClient ?? (_authClient = new AuthenticationClient(base._config)); }
+        public AuthenticationClient Authentication { get => base._authentication; }
 
         public ExploreClient _exploreClient;
         public ExploreClient Explore { get => _exploreClient ?? (_exploreClient = new ExploreClient(base._config, base._authentication)); }

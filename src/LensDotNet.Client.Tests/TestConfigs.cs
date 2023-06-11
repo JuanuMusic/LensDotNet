@@ -29,11 +29,16 @@ namespace LensDotNet.Tests
         public static string IPFS_USERNAME => Configuration.GetSection("ipfs")["user"];
         public static string IPFS_PASSWORD => Configuration.GetSection("ipfs")["password"];
         public static string IPFS_API_ENDPOINT => Configuration.GetSection("ipfs")["api_endpoint"];
+        
         static TestConfigs()
         {
             var bldr = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true);
+                .SetBasePath(Directory.GetCurrentDirectory());
+            if(File.Exists("appsettings.json"))
+                bldr = bldr.AddJsonFile("appsettings.json", true);
+            else 
+                throw new Exception("appsettings.json not found. make a copy from appsettings.example.json an replace your keys");
+            
             Configuration = bldr.Build();
         }
     }

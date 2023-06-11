@@ -402,4 +402,4 @@ Thumbs.db.meta
 # VS Code
 **/.vscode
 Examples/LensDotNet.Examples.Unity/.vsconfig
-*/appsettings.json
+appsettings.json

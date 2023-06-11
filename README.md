@@ -12,6 +12,8 @@ LensDotNet is a .NET library that provides an easy and efficient way to interact
     - [Package Manager Console](#package-manager-console)
     - [NuGet Package Manager in Visual Studio](#nuget-package-manager-in-visual-studio)
   - [Usage](#usage)
+    - [Basic Setup](#basic-setup)
+    - [Authenticating](#authenticating)
   - [Contributing](#contributing)
   - [Roadmap](#roadmap)
   - [Acknowledgements](#acknowledgements)
@@ -42,6 +44,7 @@ Install-Package LensDotNet
 
 ## Usage
 
+### Basic Setup
 Here's a very basic example of how to use LensDotNet:
 
 ```csharp
@@ -56,6 +59,37 @@ var profiles = await client.Explore.ExploreProfiles();
 Console.WriteLine($"Found {profiles.Items.Length} profiles");
 foreach (var profile in profiles.Items)
     Console.WriteLine($"name: {profile.Name} - owner: {profile.OwnedBy} - id: {profile.Id}");
+
+```
+
+### Authenticating
+Most mutations (write calls) to the API, require that the user is authenticated.
+Authentication is a set of steps that requires the user to sign a message with the wallet that owns the profile.
+To do this, LensDotNet decouples the Signing process letting the implementator (you) chose the way to do it.
+
+This is how it works:
+
+```csharp
+using LensDotNet;
+
+// Create a LensClient instance
+var config = new LensConfig("https://api-mumbai.lens.dev");
+var client = new LensClient(config);
+
+// Generate a challenge passing the user address
+var challenge = await client.Authentication.GenerateChallenge(account.Address);
+
+// Sign the challenge string with whatever method you want.
+var signature = yourSignerImplementation.Sign(challenge.Text, account);
+
+// Authenticate the client with the signed message and the address.
+await client.Authentication.Authenticate(account.Address, signature);
+
+// Check if user is authenticated
+if(await client.Authentication.IsAuthenticated())
+  Console.WriteLine("Authenticated!");
+else
+  Console.WriteLine("Not authenticated!");
 
 ```
 
