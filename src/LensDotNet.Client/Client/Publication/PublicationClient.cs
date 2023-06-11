@@ -12,50 +12,73 @@ namespace LensDotNet.Client
     {
         public PublicationClient(LensConfig config, AuthenticationClient? authentication = null) : base(config, authentication) { }
 
-        public async Task<PaginatedResult<PublicationForSaleFragment>> AllForSale(ProfilePublicationsForSaleRequest forSaleRequest)
+        #region AllForSale
+        /// <summary>
+        /// This query returns you all the publications that are on sale for a given profile.
+        /// </summary>
+        /// <param name="profileId">The profile for which to fetch the publications for sale</param>
+        /// <returns></returns>
+        public async Task<PaginatedResult<PublicationForSaleFragment>> AllForSale(ProfileId profileId, LimitScalar? limit = null, Cursor? cursor = null)
+            => await AllForSale(new ProfilePublicationsForSaleRequest { ProfileId = profileId, Cursor = cursor, Limit = limit });
+
+        public async Task<PaginatedResult<PublicationForSaleFragment>> AllForSale(ProfilePublicationsForSaleRequest request)
         {
-            var request = new
-            {
-                Input = forSaleRequest
-            };
-            var resp = await _client.Query(request,
+            var resp = await _client.Query(new { Input = request },
                static (i, o) => o.ProfilePublicationsForSale(i.Input,
                    output => output.AsPaginatedResult()));
 
             return resp.Data;
         }
+        #endregion
 
-        public async Task<PaginatedResult<WalletFragment>> AllWalletsWhoCollected(WhoCollectedPublicationRequest whoCollectedPublicationRequest)
+        #region AllWalletsWhoCollected
+
+        public async Task<PaginatedResult<WalletFragment>> AllWalletsWhoCollected(InternalPublicationId publicationId, LimitScalar? limit = null, Cursor? cursor = null)
+           => await AllWalletsWhoCollected(new WhoCollectedPublicationRequest { PublicationId = publicationId, Limit = limit, Cursor = cursor });
+
+        public async Task<PaginatedResult<WalletFragment>> AllWalletsWhoCollected(WhoCollectedPublicationRequest request)
         {
-            var request = new
-            {
-                Input = whoCollectedPublicationRequest
-            };
-            var resp = await _client.Query(request,
+            var resp = await _client.Query(new { Input = request },
                 static (i, o) => o.WhoCollectedPublication(i.Input,
                     output => output.AsPaginatedResult()));
 
             return resp.Data;
         }
+        #endregion
+
+        #region Fetch
+
+        public async Task<PublicationFragment> Fetch(InternalPublicationId publicationId)
+            => await Fetch(new PublicationQueryRequest { PublicationId = publicationId });
+
+        public async Task<PublicationFragment> Fetch(TxHash txHash)
+           => await Fetch(new PublicationQueryRequest { TxHash = txHash });
 
         public async Task<PublicationFragment> Fetch(PublicationQueryRequest publicationRequest, string? observerId = null)
         {
-            var request = new
-            {
-                Input = publicationRequest
-            };
-            var resp = await _client.Query(request, static (i, o) => o.Publication(i.Input,
+            var resp = await _client.Query(new { Input = publicationRequest }, static (i, o) => o.Publication(i.Input,
                 output => output.AsFragment()));
             return resp.Data;
         }
+        #endregion
+
+        public async Task<PaginatedResult<PublicationFragment>> FetchAll(ProfileId profileId, PublicationTypes[]? publicationTypes = null, LimitScalar? limit = null, Cursor? cursor = null)
+            => await FetchAll(new PublicationsQueryRequest { 
+                ProfileId = profileId, 
+                PublicationTypes = publicationTypes, 
+                Limit = limit, 
+                Cursor = cursor });
+
+        public async Task<PaginatedResult<PublicationFragment>> FetchAll(ProfileId[] profileIds, PublicationTypes[]? publicationTypes = null, LimitScalar? limit = null, Cursor? cursor = null)
+            => await FetchAll(new PublicationsQueryRequest { 
+                ProfileIds = profileIds,
+                PublicationTypes = publicationTypes,
+                Limit = limit, 
+                Cursor = cursor });
 
         public async Task<PaginatedResult<PublicationFragment>> FetchAll(PublicationsQueryRequest publicationsQueryRequest)
         {
-            var request = new
-            {
-                Input = publicationsQueryRequest
-            };
-            var resp = await _client.Query(request,
+            var resp = await _client.Query(new { Input = publicationsQueryRequest },
                 static (i, o) => o.Publications(i.Input,
                     output => output.AsPaginatedResult<PublicationFragment>()));
 

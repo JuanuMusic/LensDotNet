@@ -37,7 +37,7 @@ namespace LensDotNet.Tests
             if(File.Exists("appsettings.json"))
                 bldr = bldr.AddJsonFile("appsettings.json", true);
             else 
-                throw new Exception("appsettings.json not found. make a copy from appsettings.example.json an replace your keys");
+                throw new Exception("appsettings.json not found. make a copy from appsettings.example.json an replace your keys. Make sure to set the 'Copy to output' property to true.");
             
             Configuration = bldr.Build();
         }

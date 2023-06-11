@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ContentFiles\lensdotnetlogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
