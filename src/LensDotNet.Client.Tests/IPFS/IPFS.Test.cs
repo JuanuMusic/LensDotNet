@@ -20,7 +20,7 @@ namespace LensDotNet.Tests.IPFS
         [Test]
         public async Task Test_Add_Should_Correctly_Return_AddResponse()
         {
-            string content = "This is a test for adding data to IPDFS";
+            string content = "This is a test for adding data to IPFS";
             var data = Encoding.UTF8.GetBytes(content);
             var resp = await client.Add(data, "test.txt");
             Assert.That(resp, Is.Not.Null);
