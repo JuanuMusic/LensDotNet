@@ -148,6 +148,37 @@ namespace LensDotNet.Client.Fragments.Publication
                 Items = resultInfo.Items(itm => itm.AsFragment())
             };
 
-    
+        [GraphQLFragment]
+        public static ElectedMirrorFragment AsFragment(this ElectedMirror electedMirror)
+            => new ElectedMirrorFragment
+            {
+                MirrorId = electedMirror.MirrorId,
+                Profile = electedMirror.Profile(p => p.AsFragment())
+            };
+
+        [GraphQLFragment]
+        public static MirrorEventFragment AsFragment(this MirrorEvent @event)
+            => new MirrorEventFragment
+            {
+                Timestamp = @event.Timestamp,
+                Profile = @event.Profile(p => p.AsFragment())
+            };
+
+        [GraphQLFragment]
+        public static CollectedEventFragment AsFragment(this CollectedEvent @event)
+            => new CollectedEventFragment
+            {
+                Timestamp = @event.Timestamp,
+                Profile = @event.Profile(p => p.AsFragment())
+            };
+
+        [GraphQLFragment]
+        public static ReactionEventFragment AsFragment(this ReactionEvent @event)
+            => new ReactionEventFragment
+            {
+                Reaction = @event.Reaction,
+                Timestamp = @event.Timestamp,
+                Profile = @event.Profile(p => p.AsFragment())
+            };
     }
 }

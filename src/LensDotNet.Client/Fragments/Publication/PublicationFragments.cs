@@ -98,4 +98,25 @@ namespace LensDotNet.Client.Fragments.Publication
         public PublicationMetadataStatusType Status { get; set; }
         public string Reason { get; set; }
     }
+
+    public record ElectedMirrorFragment
+    {
+        public string MirrorId { get; set; }
+        public DateTimeOffset Timestamp { get; set; }
+        public ProfileFragment Profile { get; set; }
+    }
+
+    public abstract record BaseEventFragment
+    {
+        public DateTimeOffset Timestamp { get; set; }
+        public ProfileFragment Profile { get; set; }
+    }
+
+    public record MirrorEventFragment : BaseEventFragment {}
+    public record CollectedEventFragment : BaseEventFragment {}
+
+    public record ReactionEventFragment : BaseEventFragment
+    {
+        public ReactionTypes Reaction { get; set; } 
+    }
 }
