@@ -34,7 +34,7 @@ namespace LensDotNet.Client
 
         private void UpdateAuthHeader()
         {
-            if (_authentication == null) return;
+            if (_authentication == null || string.IsNullOrWhiteSpace(_authentication.AccessToken)) return;
 
             string AUTH_HEADER = "Authorization";
             string token = $"Bearer {_authentication.AccessToken}";
