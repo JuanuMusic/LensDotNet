@@ -14,7 +14,7 @@ namespace LensDotNet.Tests.Client.Gasless
         [SetUp]
         public async Task Setup()
         {
-            authenticatedClient = await Helpers.GetAuthenticationClient(_account);
+            authenticatedClient = await Helpers.GetAuthenticatedClient(_account);
             client = new GaslessClient(TestConfigs.DEV_CONFIG, authenticatedClient);
         }
 

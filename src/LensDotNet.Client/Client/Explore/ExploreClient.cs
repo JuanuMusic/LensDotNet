@@ -21,7 +21,7 @@ namespace LensDotNet.Client
             };
             var resp = await _client.Query(request,
                 static (i, o) => o.ExploreProfiles(i.Input,
-                    output => output.AsPaginatedResult<ProfileFragment>()));
+                    output => output.AsPaginatedResult()));
 
             if (resp.Errors != null && resp.Errors.Length > 0)
             {

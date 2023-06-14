@@ -18,7 +18,7 @@ namespace LensDotNet.Tests.Client.Publication
         [SetUp]
         public async Task Setup()
         {
-            authenticatedClient = await Helpers.GetAuthenticationClient(_account);
+            authenticatedClient = await Helpers.GetAuthenticatedClient(_account);
             client = new PublicationClient(TestConfigs.DEV_CONFIG, authenticatedClient);
         }
         

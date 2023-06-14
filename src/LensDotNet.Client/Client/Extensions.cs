@@ -20,7 +20,7 @@ namespace LensDotNet.Client
             => new AggregateException(message, errors.Select(err => new Exception(err.Message)).ToArray());
 
         public static void AssertErrors<T>(this GraphQLResult<T> resp)
-        {
+        { 
             if (resp.Errors != null && resp.Errors.Length > 0)
                 throw resp.Errors.ToException("GraphQL Result Errors occured");
         }

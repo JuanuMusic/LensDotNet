@@ -28,7 +28,7 @@ namespace LensDotNet.Client.Fragments.Profile
            };
 
         [GraphQLFragment]
-        public static PaginatedResult<ProfileFragment> AsPaginatedResult<T>(this ExploreProfileResult resultInfo)
+        public static PaginatedResult<ProfileFragment> AsPaginatedResult(this ExploreProfileResult resultInfo)
           => new PaginatedResult<ProfileFragment>
           {
               Items = resultInfo.Items(itm => itm.AsFragment()),

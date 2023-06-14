@@ -1,5 +1,6 @@
 ﻿using LensDotNet.Client.Authentication;
 using LensDotNet.Config;
+using LensDotNet.ZeroQLImpl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,16 @@ namespace LensDotNet.Client
         internal readonly AuthenticationClient? _authentication;
         internal readonly LensGraphQLClient _client;
         internal readonly LensConfig _config;
-
+        internal readonly HttpClientHandler _clientMessageHandler;
         public BaseClient(LensConfig config, AuthenticationClient? authentication = null)
         {
             _config = config;
+            _clientMessageHandler = new HttpClientHandler();
+
             var httpClient = new HttpClient();
             httpClient.BaseAddress = config.GqlEndpoint;
-            _client = new LensGraphQLClient(httpClient);
+            
+            _client = new LensGraphQLClient(httpClient, new LensQueryPipeline());
             _authentication = authentication;
             if (_authentication != null)
             {

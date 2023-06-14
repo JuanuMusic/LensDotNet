@@ -8,8 +8,8 @@ namespace LensDotNet.Client
     using System.Text.Json.Serialization;
     using System.Text.Json.Nodes;
     using System.Text.Json;
-    using ZeroQL;
-    using ZeroQL.Json;
+    using global::ZeroQL;
+    using global::ZeroQL.Json;
     using LensDotNet.Client.Json.Converters;
 
     public class LensGraphQLClient : global::ZeroQL.GraphQLClient<Query, Mutation>

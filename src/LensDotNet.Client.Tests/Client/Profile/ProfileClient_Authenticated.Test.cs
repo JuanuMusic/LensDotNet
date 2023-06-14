@@ -15,7 +15,7 @@ namespace LensDotNet.Tests.Client.Profile
         [SetUp]
         public async Task Setup()
         {
-            authenticationClient = await Helpers.GetAuthenticationClient(_account);
+            authenticationClient = await Helpers.GetAuthenticatedClient(_account);
             client = new ProfileClient(TestConfigs.DEV_CONFIG, authenticationClient);
         }
         [Test]

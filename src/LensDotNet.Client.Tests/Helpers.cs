@@ -18,7 +18,7 @@ namespace LensDotNet.Tests
     public static class Helpers
     {
 
-        public static async Task<AuthenticationClient> GetAuthenticationClient(Account account)
+        public static async Task<AuthenticationClient> GetAuthenticatedClient(Account account)
         {
             var authenticationClient = new AuthenticationClient(TestConfigs.DEV_CONFIG);
             var challenge = await authenticationClient.GenerateChallenge(account.Address);

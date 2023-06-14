@@ -12,7 +12,7 @@ namespace LensDotNet.Fragments.Feed
     public static class PublicationFragmentsBuildExtensions
     {
         [GraphQLFragment]
-        public static PaginatedResult<FeedItemFragment> AsFragment(this PaginatedFeedResult result)
+        public static PaginatedResult<FeedItemFragment> AsPaginatedResult(this PaginatedFeedResult result)
             => new PaginatedResult<FeedItemFragment>
             {
                 Items = result.Items(i => i.AsFragment()),

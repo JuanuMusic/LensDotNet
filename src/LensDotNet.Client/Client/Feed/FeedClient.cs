@@ -15,10 +15,13 @@ namespace LensDotNet.Client.Feed
         {
         }
 
+        public async Task<PaginatedResult<FeedItemFragment>> Fetch(ProfileId profileId)
+            => await Fetch(new FeedRequest { ProfileId = profileId });
+
         public async Task<PaginatedResult<FeedItemFragment>> Fetch(FeedRequest request)
         {
             var resp = await _client.Query(new { Input = request }, 
-                static (i, o) => o.Feed(i.Input, output => output.AsFragment()));
+                static (i, o) => o.Feed(i.Input, output => output.AsPaginatedResult()));
             resp.AssertErrors();
             return resp.Data;
         }
